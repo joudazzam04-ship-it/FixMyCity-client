@@ -1,0 +1,41 @@
+.about-intro {
+  display: flex;
+  justify-content: space-between;
+  gap: 70px;
+
+  padding: 80px 100px;
+  background-color: #f7fbf8;
+}
+
+.intro-left {
+  width: 40%;
+}
+
+.intro-left span {
+  color: #159447;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.intro-left h2 {
+  font-family: "Outfit", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+
+  color: #17232b;
+  margin-top: 15px;
+}
+
+.intro-right {
+  width: 55%;
+}
+
+.intro-right p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #5f6b73;
+
+  margin-bottom: 18px;
+}

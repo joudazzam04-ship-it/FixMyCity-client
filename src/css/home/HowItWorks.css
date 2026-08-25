@@ -1,0 +1,55 @@
+.how-it-works {
+  padding: 35px 70px 50px;
+  background-color: white;
+  position: relative;
+}
+
+.how-it-works::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background-color: #159447;
+}
+
+.how-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 28px 35px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  background-color: #f4faf6;
+  border-radius: 12px;
+}
+
+.how-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+}
+
+.how-icon {
+  color: #159447;
+  font-size: 28px;
+  min-width: 35px;
+}
+
+.how-item h3 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #17232b;
+}
+
+.how-item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #667078;
+}

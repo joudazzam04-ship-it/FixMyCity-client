@@ -1,0 +1,76 @@
+.popular-issues {
+  padding: 40px 70px;
+  background-color: white;
+  text-align: center;
+}
+
+.popular-issues h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #17232b;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.popular-issues h2::after {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 2px;
+  background-color: #159447;
+  margin: 8px auto 0;
+}
+
+.issues-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.issue-card {
+  width: 250px;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 18px;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  background-color: white;
+
+  text-align: left;
+}
+
+.issue-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.issue-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 27px;
+  background-color: #e8f5ed;
+  flex-shrink: 0;
+}
+
+.issue-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #17232b;
+  margin: 0 0 6px 0;
+}
+
+.issue-card p {
+  font-size: 13px;
+  color: #667078;
+  margin: 0;
+  line-height: 1.5;
+}
