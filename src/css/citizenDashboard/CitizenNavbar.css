@@ -1,0 +1,106 @@
+.citizen-navbar {
+  background-color: white !important;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 12px 0;
+}
+
+.citizen-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 700;
+  font-size: 20px;
+
+  color: #17232b !important;
+  text-decoration: none;
+}
+
+.citizen-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* center navbar links */
+
+.citizen-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.citizen-navbar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #17232b !important;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  padding: 18px 5px !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+}
+
+.citizen-navbar .nav-link svg {
+  font-size: 19px;
+}
+
+.citizen-navbar .nav-link:hover {
+  color: #159447 !important;
+}
+
+/* user dropdown */
+
+.user-dropdown-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-dropdown-title svg {
+  font-size: 20px;
+}
+
+.citizen-navbar .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #17232b !important;
+  font-weight: 500;
+
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.citizen-navbar .dropdown-toggle:hover {
+  color: #159447 !important;
+}
+
+.citizen-navbar .dropdown-menu {
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+
+  padding: 8px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.citizen-navbar .dropdown-item {
+  border-radius: 7px;
+
+  padding: 8px 12px;
+
+  font-size: 14px;
+}
+
+.citizen-navbar .dropdown-item:hover {
+  background-color: #eef8f1;
+  color: #159447;
+}
