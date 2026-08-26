@@ -1,0 +1,197 @@
+.my-reports-page {
+  background-color: #fafafa;
+  min-height: 100vh;
+  padding: 40px 0 55px;
+}
+
+.my-reports-container {
+  width: 88%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page title */
+
+.my-reports-heading {
+  margin-bottom: 28px;
+}
+
+.my-reports-heading h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #17232b;
+}
+
+.my-reports-heading p {
+  margin: 0;
+  font-size: 15px;
+  color: #667078;
+}
+
+/* Table wrapper */
+
+.reports-table {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+
+.reports-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.7fr;
+  align-items: center;
+
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #dddddd;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #17232b;
+}
+
+/* Each report row */
+
+.report-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.7fr;
+  align-items: center;
+
+  padding: 18px 24px;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.report-row:last-child {
+  border-bottom: none;
+}
+
+/* Issue column */
+
+.report-issue {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.report-row-image {
+  width: 75px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 7px;
+  flex-shrink: 0;
+}
+
+.report-row-info h3 {
+  margin: 0 0 7px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #17232b;
+}
+
+.report-row-info p {
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  font-size: 13px;
+  color: #667078;
+}
+
+.report-row-info p svg {
+  font-size: 14px;
+}
+
+/* Status badges */
+
+.report-status-badge {
+  display: inline-block;
+
+  padding: 7px 13px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* In Progress */
+
+.report-status-badge.in-progress {
+  background-color: #fff3e6;
+  color: #d97706;
+  border: 1px solid #f5c27a;
+}
+
+/* New */
+
+.report-status-badge.new {
+  background-color: #f2f4f5;
+  color: #555;
+  border: 1px solid #d5d9dc;
+}
+
+/* Resolved */
+
+.report-status-badge.resolved {
+  background-color: #eaf7ee;
+  color: #159447;
+  border: 1px solid #a9dab9;
+}
+
+/* Date */
+
+.report-date {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* View button */
+
+.report-action button {
+  padding: 8px 18px;
+
+  border: 1px solid #bfc4c7;
+  border-radius: 6px;
+
+  background-color: white;
+  color: #17232b;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.report-action button:hover {
+  border-color: #159447;
+  color: #159447;
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+  .reports-table-header {
+    display: none;
+  }
+
+  .report-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .report-status,
+  .report-date,
+  .report-action {
+    margin-left: 91px;
+  }
+}
