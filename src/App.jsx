@@ -4,6 +4,7 @@ import CitizenDashboard from "./pages/CitizenDashboard.jsx";
 import ReportIssue from "./pages/ReportIssue.jsx";
 import MyReports from "./pages/MyReports.jsx";
 import ReportDetails from "./pages/ReportDetails.jsx";
+import EmployeeDashboard from "./pages/EmployeeDashboard.jsx";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -30,6 +31,10 @@ function App() {
         <Route
           path="/citizen/reports/:id"
           element={<ReportDetails />}
+        />
+        <Route
+          path="/employee/dashboard"
+          element={<EmployeeDashboard />}
         />
 
       </Routes>

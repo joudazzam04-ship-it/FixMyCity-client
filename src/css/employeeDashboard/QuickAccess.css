@@ -1,0 +1,73 @@
+.quick-actions-section {
+  width: 300px;
+
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  padding: 20px;
+}
+
+.quick-actions-section h2 {
+  margin: 0 0 18px;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.quick-action-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px 14px;
+
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  margin-bottom: 16px;
+}
+
+.quick-action-card:last-child {
+  margin-bottom: 0;
+}
+
+.quick-action-icon {
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.quick-action-icon svg {
+  font-size: 23px;
+  color: #17232b;
+}
+
+.quick-action-card h3 {
+  margin: 0 0 5px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #17232b;
+}
+
+.quick-action-card p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: #667078;
+}

@@ -1,0 +1,17 @@
+
+.employee-dashboard-layout {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+.employee-dashboard-content {
+  margin-left: 240px;
+  padding: 35px 40px;
+}
+
+.employee-dashboard-main {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 25px;
+}

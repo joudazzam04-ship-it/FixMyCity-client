@@ -1,0 +1,146 @@
+
+.assigned-reports-section {
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  padding: 20px;
+
+  flex: 1;
+}
+
+.assigned-reports-section h2 {
+  margin: 0 0 18px;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.assigned-report-card {
+  display: grid;
+  grid-template-columns: 95px 1fr 130px;
+
+  gap: 18px;
+  align-items: center;
+
+  padding: 14px;
+
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  margin-bottom: 12px;
+}
+
+.assigned-report-image {
+  width: 95px;
+  height: 82px;
+
+  object-fit: cover;
+
+  border-radius: 6px;
+}
+
+.assigned-report-info h3 {
+  margin: 0 0 8px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.assigned-report-info p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin: 5px 0;
+
+  font-size: 13px;
+
+  color: #667078;
+}
+
+.assigned-report-info p svg {
+  font-size: 14px;
+}
+
+.assigned-report-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 18px;
+}
+
+.employee-status-badge {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.employee-status-badge.in-progress {
+  background-color: #fff3e6;
+  color: #d97706;
+
+  border: 1px solid #f5c27a;
+}
+
+.employee-status-badge.assigned {
+  background-color: #eef2f5;
+  color: #4b5563;
+
+  border: 1px solid #d5dadd;
+}
+
+.assigned-report-action button {
+  padding: 8px 14px;
+
+  background-color: white;
+
+  border: 1px solid #bfc4c7;
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.assigned-report-action button:hover {
+  border-color: #159447;
+  color: #159447;
+}
+
+.view-all-reports-btn {
+  width: 60%;
+
+  display: block;
+
+  margin: 18px auto 0;
+
+  padding: 10px;
+
+  background-color: white;
+
+  border: 1px solid #bfc4c7;
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.view-all-reports-btn:hover {
+  border-color: #159447;
+  color: #159447;
+}
