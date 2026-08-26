@@ -3,6 +3,7 @@ import About from "./pages/About.jsx";
 import CitizenDashboard from "./pages/CitizenDashboard.jsx";
 import ReportIssue from "./pages/ReportIssue.jsx";
 import MyReports from "./pages/MyReports.jsx";
+import ReportDetails from "./pages/ReportDetails.jsx";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -25,6 +26,10 @@ function App() {
         <Route
           path="/citizen/reports"
           element={<MyReports />}
+        />
+        <Route
+          path="/citizen/reports/:id"
+          element={<ReportDetails />}
         />
 
       </Routes>

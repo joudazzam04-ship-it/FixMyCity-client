@@ -3,13 +3,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
-import {
-  FiHome,
-  FiFileText,
-  FiPlusCircle,
-  FiUser,
-} from "react-icons/fi";
+import { NavLink,Link } from "react-router-dom";
+import {FiHome,FiFileText,FiPlusCircle,FiUser,} from "react-icons/fi";
 
 import "../../css/citizenDashboard/CitizenNavbar.css";
 import logo from "../../assets/logo.png";
@@ -35,17 +30,17 @@ export default function CitizenNavbar() {
 
         <BootstrapNavbar.Collapse id="citizen-navbar-nav">
           <Nav className="mx-auto citizen-nav-links">
-            <Nav.Link as={Link} to="/citizen/dashboard">
+            <Nav.Link as={NavLink} to="/citizen/dashboard">
               <FiHome />
               Dashboard
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/citizen/reports">
+            <Nav.Link as={NavLink} to="/citizen/reports">
               <FiFileText />
               My Reports
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/citizen/report">
+            <Nav.Link as={NavLink} to="/citizen/report">
               <FiPlusCircle />
               Report Issue
             </Nav.Link>

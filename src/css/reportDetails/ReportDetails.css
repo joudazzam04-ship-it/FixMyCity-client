@@ -1,0 +1,318 @@
+.report-details-page {
+  background-color: #fafafa;
+  min-height: 100vh;
+  padding: 35px 0 50px;
+}
+
+.report-details-container {
+  width: 88%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Back button */
+
+.back-to-reports {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 20px;
+
+  color: #17232b;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-to-reports:hover {
+  color: #159447;
+}
+
+/* Page title */
+
+.report-details-title {
+  margin: 0 0 25px;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+/* Main report card */
+
+.report-info-card {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  gap: 30px;
+
+  align-items: start;
+
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  padding: 28px;
+
+  margin-bottom: 30px;
+}
+
+/* Image */
+
+.report-info-image img {
+  width: 100%;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+/* Middle information */
+
+.report-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.report-info-row {
+  display: flex;
+  gap: 8px;
+
+  font-size: 15px;
+
+  color: #374151;
+}
+
+.report-info-label {
+  font-weight: 600;
+  color: #17232b;
+}
+
+.report-description-section {
+  margin-top: 5px;
+}
+
+.report-description-section p {
+  margin: 7px 0 0;
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  color: #5f6870;
+}
+
+/* Right side status */
+
+.report-info-side {
+  border-left: 1px solid #dddddd;
+
+  padding-left: 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.report-info-side p {
+  margin: 7px 0 0;
+
+  font-size: 14px;
+
+  color: #555555;
+}
+
+/* Status badge */
+
+.details-status-badge {
+  display: inline-block;
+
+  margin-top: 8px;
+
+  padding: 7px 13px;
+
+  background-color: #fff3e6;
+
+  border: 1px solid #f5c27a;
+  border-radius: 7px;
+
+  color: #d97706;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Status History */
+
+.status-history-section {
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  padding: 25px 28px;
+
+  margin-bottom: 30px;
+}
+
+.status-history-section h2 {
+  margin: 0 0 22px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.status-history-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.status-history-card {
+  padding: 20px;
+
+  background-color: #fafafa;
+
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+}
+
+.status-history-card h3 {
+  margin: 0 0 8px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #17232b;
+}
+
+.status-history-card p {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #667078;
+}
+
+/* Updates */
+
+.report-updates-section {
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  padding: 25px 28px;
+}
+
+.report-updates-section h2 {
+  margin: 0 0 20px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.report-updates-container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.report-update-card {
+  padding: 18px 20px;
+
+  background-color: #fafafa;
+
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+}
+
+.report-update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 9px;
+}
+
+.report-update-header h3 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #17232b;
+}
+
+.report-update-header span {
+  font-size: 13px;
+
+  color: #777777;
+}
+
+.report-update-card p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #5f6870;
+}
+
+/* View button from My Reports */
+
+.view-report-btn {
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  background-color: white;
+
+  border: 1px solid #bfc4c7;
+  border-radius: 6px;
+
+  color: #17232b;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.view-report-btn:hover {
+  border-color: #159447;
+  color: #159447;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .report-info-card {
+    grid-template-columns: 1fr;
+  }
+
+  .report-info-image img {
+    max-width: 350px;
+  }
+
+  .report-info-side {
+    border-left: none;
+    border-top: 1px solid #dddddd;
+
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
+  .status-history-container {
+    grid-template-columns: 1fr;
+  }
+}

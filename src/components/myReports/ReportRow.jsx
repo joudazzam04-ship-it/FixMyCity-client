@@ -2,7 +2,6 @@ import { FiMapPin } from "react-icons/fi";
 import "../../css/myReport/MyReport.css";
 
 import { Link } from "react-router-dom";
-import { FiMapPin } from "react-icons/fi";
 
 function ReportRow({ id, image, title, location, status, date }) {
   return (
