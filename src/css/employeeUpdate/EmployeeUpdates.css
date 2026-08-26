@@ -1,0 +1,135 @@
+.employee-updates-layout {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+.employee-updates-content {
+  margin-left: 240px;
+  padding: 35px 40px;
+}
+
+.employee-updates-heading {
+  margin-bottom: 30px;
+}
+
+.employee-updates-heading h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #17232b;
+}
+
+.employee-updates-heading p {
+  margin: 0;
+  font-size: 15px;
+  color: #667078;
+}
+
+/* list */
+
+.updates-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* report card */
+
+.update-report-card {
+  display: grid;
+  grid-template-columns: 130px 1fr 160px;
+  gap: 22px;
+
+  align-items: center;
+
+  padding: 20px;
+
+  background-color: white;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+.update-report-image {
+  width: 130px;
+  height: 105px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+.update-report-info h3 {
+  margin: 0 0 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #17232b;
+}
+
+.update-report-info p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin: 6px 0;
+
+  font-size: 14px;
+
+  color: #667078;
+}
+
+.update-report-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 20px;
+}
+
+/* status */
+
+.update-report-status {
+  padding: 7px 12px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.update-report-status.in-progress {
+  background-color: #fff3e6;
+  color: #d97706;
+
+  border: 1px solid #f5c27a;
+}
+
+.update-report-status.assigned {
+  background-color: #eef2f5;
+  color: #4b5563;
+
+  border: 1px solid #d5dadd;
+}
+
+/* update button */
+
+.update-report-button {
+  padding: 9px 18px;
+
+  background-color: #159447;
+
+  border-radius: 7px;
+
+  color: white;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.update-report-button:hover {
+  background-color: #117b3b;
+  color: white;
+}

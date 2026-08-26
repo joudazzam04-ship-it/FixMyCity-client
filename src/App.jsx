@@ -5,6 +5,7 @@ import ReportIssue from "./pages/ReportIssue.jsx";
 import MyReports from "./pages/MyReports.jsx";
 import ReportDetails from "./pages/ReportDetails.jsx";
 import EmployeeDashboard from "./pages/EmployeeDashboard.jsx";
+import EmployeeUpdate from "./pages/EmployeeUpdate.jsx";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -35,6 +36,10 @@ function App() {
         <Route
           path="/employee/dashboard"
           element={<EmployeeDashboard />}
+        />
+        <Route
+          path="/employee/update"
+          element={<EmployeeUpdate />}
         />
 
       </Routes>
