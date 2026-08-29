@@ -1,0 +1,130 @@
+.assign-report-title {
+  margin: 0 0 18px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #17232b;
+}
+
+.assign-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.assign-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7780;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.assign-summary-grid p,
+.assign-description p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #17232b;
+}
+
+.assign-description {
+  padding-top: 18px;
+  border-top: 1px solid #f0f2f3;
+}
+
+.assign-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.assign-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.assign-field-wide {
+  grid-column: 1 / -1;
+}
+
+.assign-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #17232b;
+}
+
+.assign-field select,
+.assign-field textarea {
+  padding: 10px 14px;
+  border: 1px solid #d5d9dc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.assign-field select:disabled {
+  background-color: #f3f4f5;
+  color: #9aa3a9;
+}
+
+.assign-field textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.assign-counter {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #6b7780;
+}
+
+.assign-warning {
+  margin: 0;
+  font-size: 12px;
+  color: #c23b3b;
+}
+
+.assign-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.assign-reject-button,
+.assign-submit-button {
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.assign-reject-button {
+  border: 1px solid #d5d9dc;
+  background-color: white;
+  color: #c23b3b;
+}
+
+.assign-reject-button:hover {
+  border-color: #c23b3b;
+}
+
+.assign-submit-button {
+  border: none;
+  background-color: #159447;
+  color: white;
+}
+
+.assign-submit-button:hover {
+  background-color: #0f7a39;
+}
+
+@media (max-width: 900px) {
+  .assign-summary-grid,
+  .assign-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

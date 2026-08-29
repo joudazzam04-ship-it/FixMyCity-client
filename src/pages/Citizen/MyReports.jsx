@@ -8,6 +8,7 @@ import "../../css/myReport/MyReport.css";
 function MyReports({reports}) {
   return (
     <>
+    
       <CitizenNavbar />
 
       <main className="my-reports-page">

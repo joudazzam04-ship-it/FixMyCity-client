@@ -1,25 +1,38 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FiMapPin } from "react-icons/fi";
 
 import "../../../css/reportIssue/ReportIssue.css";
 
-function ReportForm() {
+function ReportForm({
+  title, setTitle,
+  category, setCategory,
+  location, setLocation,
+  description, setDescription,
+  noticedDate, setNoticedDate,
+  onSubmit
+}) {
+  const navigate = useNavigate();
+
   return (
     <div className="report-form-left">
 
       <div className="report-field">
         <label>Issue Title *</label>
-
         <input
           type="text"
           placeholder="e.g., Large pothole on Main Street"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
         />
       </div>
 
       <div className="report-field">
         <label>Category *</label>
-
-        <select>
+        <select
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
           <option value="">Select a category</option>
           <option>Road Damage</option>
           <option>Streetlight</option>
@@ -31,38 +44,50 @@ function ReportForm() {
 
       <div className="report-field">
         <label>Location *</label>
-
         <div className="report-location-input">
           <FiMapPin />
-
           <input
             type="text"
             placeholder="Search or enter location"
+            value={location}
+            onChange={(event) => setLocation(event.target.value)}
           />
         </div>
       </div>
 
       <div className="report-field">
         <label>Description *</label>
-
         <textarea
           rows="5"
           placeholder="Please describe the issue in detail..."
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
         ></textarea>
       </div>
 
       <div className="report-field report-date-field">
         <label>When did you notice this issue?</label>
-
-        <input type="date" />
+        <input
+          type="date"
+          value={noticedDate}
+          onChange={(event) => setNoticedDate(event.target.value)}
+        />
       </div>
 
       <div className="report-form-buttons">
-        <button className="submit-report-btn">
+        <button
+          type="button"
+          className="submit-report-btn"
+          onClick={onSubmit}
+        >
           Submit Report
         </button>
 
-        <button className="cancel-report-btn">
+        <button
+          type="button"
+          className="cancel-report-btn"
+          onClick={() => navigate("/citizen/reports")}
+        >
           Cancel
         </button>
       </div>

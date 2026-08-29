@@ -1,4 +1,4 @@
-import { FiMapPin } from "react-icons/fi";
+import { FiMapPin, FiImage } from "react-icons/fi";
 import "../../../css/myReport/MyReport.css";
 
 import { Link } from "react-router-dom";
@@ -8,11 +8,17 @@ function ReportRow({ id, image, title, location, status, date }) {
     <div className="report-row">
 
       <div className="report-issue">
-        <img
-          src={image}
-          alt={title}
-          className="report-row-image"
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            className="report-row-image"
+          />
+        ) : (
+          <div className="report-row-placeholder">
+            <FiImage />
+          </div>
+        )}
 
         <div className="report-row-info">
           <h3>{title}</h3>
@@ -28,7 +34,7 @@ function ReportRow({ id, image, title, location, status, date }) {
         <span
           className={`report-status-badge ${status
             .toLowerCase()
-            .replace(" ", "-")}`}  //so the status can match the css class name for styling purposes
+            .replaceAll(" ", "-")}`}
         >
           {status}
         </span>
@@ -38,11 +44,11 @@ function ReportRow({ id, image, title, location, status, date }) {
         {date}
       </div>
 
-<div className="report-action">
-  <Link to={`/citizen/reports/${id}`} className="view-report-btn">
-    View
-  </Link>
-</div>
+      <div className="report-action">
+        <Link to={`/citizen/reports/${id}`} className="view-report-btn">
+          View
+        </Link>
+      </div>
 
     </div>
   );

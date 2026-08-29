@@ -276,4 +276,35 @@
   }
 }
 
+.report-image-preview {
+  position: relative;
+  width: 100%;
+}
 
+.report-image-preview img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+.report-image-preview button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.report-image-preview button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
