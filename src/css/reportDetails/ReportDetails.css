@@ -135,15 +135,45 @@
 
   padding: 7px 13px;
 
-  background-color: #fff3e6;
-
-  border: 1px solid #f5c27a;
   border-radius: 7px;
-
-  color: #d97706;
 
   font-size: 13px;
   font-weight: 600;
+}
+
+/* Reported = Gray */
+.details-status-badge.reported {
+  background-color: #eef2f5;
+  color: #4b5563;
+  border: 1px solid #d5dadd;
+}
+
+/* Assigned = Red */
+.details-status-badge.assigned {
+  background-color: #fdecec;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* In Progress = Yellow */
+.details-status-badge.in-progress {
+  background-color: #fff8db;
+  color: #b7791f;
+  border: 1px solid #f2cf66;
+}
+
+/* Under Review = Orange */
+.details-status-badge.under-review {
+  background-color: #fff0e0;
+  color: #d97706;
+  border: 1px solid #f4b26b;
+}
+
+/* Resolved = Green */
+.details-status-badge.resolved {
+  background-color: #e8f7ee;
+  color: #16803b;
+  border: 1px solid #7bcf98;
 }
 
 /* Status History */
