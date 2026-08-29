@@ -7,7 +7,7 @@ import QuickAccess from "../components/employeeDashboard/QuickAccess.jsx";
 
 import "../css/employeeDashboard/EmployeeDashboard.css";
 
-function EmployeeDashboard() {
+function EmployeeDashboard({ reports }) {
   return (
     <div className="employee-dashboard-layout">
       <EmployeeSidebar />
@@ -19,7 +19,7 @@ function EmployeeDashboard() {
         <EmployeeStats />
 
         <div className="employee-dashboard-main">
-          <AssignedReports />
+<AssignedReports reports={reports} />
           <QuickAccess />
         </div>
       </main>

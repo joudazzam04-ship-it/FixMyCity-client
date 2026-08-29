@@ -91,26 +91,35 @@
 /* status */
 
 .update-report-status {
+  display: inline-block;
   padding: 7px 12px;
-
   border-radius: 7px;
-
   font-size: 13px;
   font-weight: 600;
 }
 
 .update-report-status.in-progress {
-  background-color: #fff3e6;
-  color: #d97706;
+  background-color: #fff8db;
+  color: #b7791f;
+  border: 1px solid #f2cf66;
+}
 
-  border: 1px solid #f5c27a;
+.update-report-status.under-review {
+  background-color: #fff0e0;
+  color: #d97706;
+  border: 1px solid #f4b26b;
+}
+
+.update-report-status.resolved {
+  background-color: #e8f7ee;
+  color: #16803b;
+  border: 1px solid #7bcf98;
 }
 
 .update-report-status.assigned {
-  background-color: #eef2f5;
-  color: #4b5563;
-
-  border: 1px solid #d5dadd;
+  background-color: #fdecec;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
 }
 
 /* update button */
