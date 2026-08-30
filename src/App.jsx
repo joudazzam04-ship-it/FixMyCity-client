@@ -12,7 +12,11 @@ import EmployeeUpdateDetails from "./pages/Emp/EmployeeUpdateDetails.jsx";
 import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import AdminReports from "./pages/Admin/AdminReports.jsx";
 import ManageUsers from "./pages/Admin/ManageUsers.jsx";
-import AssignReport from "./pages/Admin/AssignReport.jsx"
+import AssignReport from "./pages/Admin/AssignReport.jsx";
+
+import Login from "./pages/Auth/LoginPage.jsx";
+import Register from "./pages/Auth/RegisterPage.jsx";
+
 
 import pothole from "./assets/pothole.jpg";
 import streetlight from "./assets/streetlight.jpg";
@@ -21,6 +25,7 @@ import waterLeak from "./assets/waterLeak.jpg";;
 import React, { useState } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 const departments = [
   "Road Maintenance",
@@ -33,12 +38,12 @@ const departments = [
 function App() {
 
   const [users, setUsers] = useState([
-  { id: 101, name: "Ahmad Omar", role: "citizen", email: "ahmad@gmail.com", phone: "+962 7 9123 4567", status: "Active", joinedOn: "May 12, 2025", department: null },
-  { id: 102, name: "Lina Mahmoud", role: "citizen", email: "lina@gmail.com", phone: "+962 7 9456 7890", status: "Active", joinedOn: "May 10, 2025", department: null },
-  { id: 201, name: "Ahmad Al-Hassan", role: "employee", email: "ahmad.hassan@pw.gov.jo", phone: "+962 7 9123 4567", status: "Active", joinedOn: "May 12, 2025", department: "Road Maintenance" },
-  { id: 202, name: "Sara Ali", role: "employee", email: "sara.ali@maintenance.gov.jo", phone: "+962 7 9234 5678", status: "Active", joinedOn: "April 28, 2025", department: "Street Lighting" },
-  { id: 203, name: "Omar Khalid", role: "employee", email: "omar.khalid@wm.gov.jo", phone: "+962 7 9345 6789", status: "Active", joinedOn: "May 5, 2025", department: "Water & Sewer" },
-  { id: 301, name: "Admin User", role: "admin", email: "admin@fixmycity.jo", phone: "+962 7 9000 0000", status: "Active", joinedOn: "Jan 3, 2025", department: null }
+  { id: 101, name: "Ahmad Omar", role: "citizen", email: "ahmad@gmail.com", password: "123456", phone: "+962 7 9123 4567", status: "Active", joinedOn: "May 12, 2025", department: null },
+  { id: 102, name: "Lina Mahmoud", role: "citizen", email: "lina@gmail.com", password: "123456", phone: "+962 7 9456 7890", status: "Active", joinedOn: "May 10, 2025", department: null },
+  { id: 201, name: "Ahmad Al-Hassan", role: "employee", email: "ahmad.hassan@pw.gov.jo", password: "123456", phone: "+962 7 9123 4567", status: "Active", joinedOn: "May 12, 2025", department: "Road Maintenance" },
+  { id: 202, name: "Sara Ali", role: "employee", email: "sara.ali@maintenance.gov.jo", password: "123456", phone: "+962 7 9234 5678", status: "Active", joinedOn: "April 28, 2025", department: "Street Lighting" },
+  { id: 203, name: "Omar Khalid", role: "employee", email: "omar.khalid@wm.gov.jo", password: "123456", phone: "+962 7 9345 6789", status: "Active", joinedOn: "May 5, 2025", department: "Water & Sewer" },
+  { id: 301, name: "Admin User", role: "admin", email: "admin@fixmycity.jo", password: "admin123", phone: "+962 7 9000 0000", status: "Active", joinedOn: "Jan 3, 2025", department: null }
 ]);
 
 const [reports, setReports] = useState([
@@ -181,26 +186,51 @@ adminNote: "",
   
 ]);
 
+const [currentUser, setCurrentUser] = useState(null);
+
+
+
+
   return (
 
     
     <Router>
       <Routes>
+        <Route
+  path="/login"
+  element={<Login users={users} setCurrentUser={setCurrentUser} />}
+/>
+<Route
+  path="/register"
+  element={<Register users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
+/>
+
+
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        <Route
-          path="/citizen/dashboard"
-          element={<CitizenDashboard />}
-        />
+       <Route
+  path="/citizen/dashboard"
+  element={<CitizenDashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+/>
+
 
         <Route
   path="/citizen/report"
-  element={<ReportIssue reports={reports} setReports={setReports} />}
+  element={
+    <ReportIssue
+      reports={reports}
+      setReports={setReports}
+      currentUser={currentUser}
+      setCurrentUser={setCurrentUser}
+    />
+  }
 />
-        <Route
+
+ <Route
   path="/citizen/reports"
-  element={<MyReports reports={reports} />}
+  element={<MyReports reports={reports} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
 />
         <Route
   path="/citizen/reports/:id"

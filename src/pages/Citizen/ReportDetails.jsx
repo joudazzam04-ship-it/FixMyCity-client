@@ -10,7 +10,7 @@ import Footer from "../../components/Home/homePage/Footer";
 
 import "../../css/reportDetails/ReportDetails.css";
 
-function ReportDetails({ reports }) {
+function ReportDetails({ reports, currentUser, setCurrentUser }) {
   const { id } = useParams();
 
   const report = reports.find(
@@ -23,7 +23,7 @@ function ReportDetails({ reports }) {
 
   return (
     <>
-      <CitizenNavbar />
+  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
 
       <main className="report-details-page">
         <div className="report-details-container">

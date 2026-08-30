@@ -6,10 +6,10 @@ import Footer from "../../components/Home/homePage/Footer";
 
 import "../../css/citizenDashboard/CitizenDashboard.css";
 
-function CitizenDashboard() {
+function CitizenDashboard({ reports, currentUser, setCurrentUser }) {
   return (
     <>
-      <CitizenNavbar />
+  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
 
       <main className="citizen-dashboard">
         <div className="dashboard-container">

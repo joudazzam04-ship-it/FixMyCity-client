@@ -5,11 +5,11 @@ import Footer from "../../components/Home/homePage/Footer";
 
 import "../../css/myReport/MyReport.css";
 
-function MyReports({reports}) {
+function MyReports({ reports, currentUser, setCurrentUser }) {
   return (
     <>
     
-      <CitizenNavbar />
+  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
 
       <main className="my-reports-page">
         <div className="my-reports-container">

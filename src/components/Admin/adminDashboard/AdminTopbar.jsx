@@ -3,8 +3,8 @@ import { FiUser, FiChevronDown } from "react-icons/fi";
 
 import "../../../css/adminDashboard/AdminTopbar.css";
 
-function AdminTopbar({ title, subtitle }) {
-  return (
+function AdminTopbar({ title, subtitle, currentUser }) {
+    return (
     <header className="admin-topbar">
 
       <div className="admin-topbar-heading">
@@ -16,8 +16,12 @@ function AdminTopbar({ title, subtitle }) {
         <FiUser className="admin-topbar-avatar" />
 
         <div className="admin-topbar-user-info">
-          <span className="admin-topbar-name">Admin User</span>
-          <span className="admin-topbar-role">Super Admin</span>
+   <span className="admin-topbar-name">
+  {currentUser ? currentUser.name : "Guest"}
+</span>
+<span className="admin-topbar-role">
+  {currentUser ? currentUser.role : ""}
+</span>
         </div>
 
         <FiChevronDown />

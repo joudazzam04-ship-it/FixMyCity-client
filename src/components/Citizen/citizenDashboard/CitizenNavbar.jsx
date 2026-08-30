@@ -3,13 +3,20 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavLink,Link } from "react-router-dom";
-import {FiHome,FiFileText,FiPlusCircle,FiUser,} from "react-icons/fi";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { FiHome, FiFileText, FiPlusCircle, FiUser } from "react-icons/fi";
 
 import "../../../css/citizenDashboard/CitizenNavbar.css";
 import logo from "../../../assets/logo.png";
 
-export default function CitizenNavbar() {
+export default function CitizenNavbar({ currentUser, setCurrentUser }) {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    setCurrentUser(null);
+    navigate("/login");
+  }
+
   return (
     <BootstrapNavbar expand="lg" className="citizen-navbar">
       <Container>
@@ -51,7 +58,7 @@ export default function CitizenNavbar() {
               title={
                 <span className="user-dropdown-title">
                   <FiUser />
-                  Ahmad Omar
+                  {currentUser ? currentUser.name : "Guest"}
                 </span>
               }
               id="citizen-user-dropdown"
@@ -63,7 +70,7 @@ export default function CitizenNavbar() {
 
               <NavDropdown.Divider />
 
-              <NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>

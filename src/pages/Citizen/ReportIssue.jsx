@@ -10,7 +10,7 @@ import ImageUpload from "../../components/Citizen/reportIssue/ImageUpload";
 
 import "../../css/reportIssue/ReportIssue.css";
 
-function ReportIssue({ reports, setReports }) {
+function ReportIssue({ reports, currentUser, setCurrentUser }) {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -65,7 +65,7 @@ function ReportIssue({ reports, setReports }) {
 
   return (
     <>
-      <CitizenNavbar />
+  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
 
       <main className="report-issue-page">
         <div className="report-issue-container">
