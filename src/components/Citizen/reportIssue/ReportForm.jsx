@@ -1,13 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FiMapPin } from "react-icons/fi";
 
 import "../../../css/reportIssue/ReportIssue.css";
 
 function ReportForm({
   title, setTitle,
   category, setCategory,
-  location, setLocation,
   description, setDescription,
   noticedDate, setNoticedDate,
   onSubmit
@@ -42,18 +40,7 @@ function ReportForm({
         </select>
       </div>
 
-      <div className="report-field">
-        <label>Location *</label>
-        <div className="report-location-input">
-          <FiMapPin />
-          <input
-            type="text"
-            placeholder="Search or enter location"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-          />
-        </div>
-      </div>
+      
 
       <div className="report-field">
         <label>Description *</label>

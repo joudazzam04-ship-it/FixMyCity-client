@@ -308,3 +308,27 @@
 .report-image-preview button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+.report-map-box {
+  height: 280px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d5d9dc;
+  margin-bottom: 6px;
+}
+
+.report-map-error {
+  color: #c23b3b;
+}
+
+
+.report-location-input input[readonly] {
+  background-color: #f7f8f9;
+  color: #4a5560;
+  cursor: default;
+}
+
+.report-map-box {
+  height: 240px;
+  margin-bottom: 6px;
+}

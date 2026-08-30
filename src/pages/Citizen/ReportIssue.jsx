@@ -20,14 +20,21 @@ function ReportIssue({ reports, currentUser, setCurrentUser }) {
   const [noticedDate, setNoticedDate] = useState("");
   const [image, setImage] = useState(null);
 
+  const [latitude, setLatitude] = useState(null);
+const [longitude, setLongitude] = useState(null);
+
   function handleSubmit() {
-    if (
+        if (
       title.trim() === "" ||
       category === "" ||
-      location.trim() === "" ||
       description.trim() === ""
     ) {
       alert("Please fill in all required fields.");
+      return;
+    }
+
+    if (latitude === null || longitude === null) {
+      alert("Please pin the location of the issue on the map.");
       return;
     }
 
@@ -38,6 +45,8 @@ function ReportIssue({ reports, currentUser, setCurrentUser }) {
       title: title,
       category: category,
       location: location,
+latitude: latitude,
+longitude: longitude,
       description: description,
       reportedDate: today,
       noticedDate: noticedDate,
@@ -91,9 +100,17 @@ function ReportIssue({ reports, currentUser, setCurrentUser }) {
               onSubmit={handleSubmit}
             />
 
-            <div className="report-form-right">
+                        <div className="report-form-right">
+              <MapSection
+                location={location}
+                setLocation={setLocation}
+                latitude={latitude}
+                longitude={longitude}
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+              />
+
               <ImageUpload image={image} setImage={setImage} />
-              <MapSection />
             </div>
 
           </div>
