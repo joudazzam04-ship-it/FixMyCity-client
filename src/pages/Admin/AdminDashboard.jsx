@@ -11,14 +11,18 @@ import "../../css/adminDashboard/AdminLayout.css";
 import "../../css/adminDashboard/AdminStats.css";
 import "../../css/adminDashboard/AdminCard.css";
 
-function AdminDashboard({ reports, users }) {
-  return (
+function AdminDashboard({ reports, users, currentUser, setCurrentUser }) {
+    return (
     <div className="admin-layout">
       <AdminSidebar />
 
     <main className="admin-content">
-  <AdminTopbar title="Admin Dashboard" />
-  <AdminStats reports={reports} users={users} />
+<AdminTopbar
+  title="Admin Dashboard"
+  currentUser={currentUser}
+  setCurrentUser={setCurrentUser}
+/> 
+ <AdminStats reports={reports} users={users} />
 
   <div className="admin-dashboard-columns">
     <div>

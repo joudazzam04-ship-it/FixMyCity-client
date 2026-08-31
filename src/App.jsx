@@ -257,7 +257,7 @@ const [currentUser, setCurrentUser] = useState(null);
 
 <Route
   path="/admin/dashboard"
-  element={<AdminDashboard reports={reports} users={users} />}
+  element={<AdminDashboard reports={reports} users={users}  />}
 />
 
 <Route

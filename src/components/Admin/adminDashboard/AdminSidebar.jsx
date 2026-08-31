@@ -5,14 +5,14 @@ import {
   FiUsers,
   FiFileText,
   FiSettings,
+  FiUser,
   FiLogOut
 } from "react-icons/fi";
 
 import logo from "../../../assets/logo.png";
 import "../../../css/adminDashboard/AdminSidebar.css";
 
-
-function AdminSidebar() {
+function AdminSidebar({ currentUser }) {
   return (
     <aside className="admin-sidebar">
 
@@ -44,6 +44,17 @@ function AdminSidebar() {
         </NavLink>
 
       </nav>
+
+      <div className="sidebar-user">
+        <FiUser className="sidebar-user-avatar" />
+
+        <div className="sidebar-user-info">
+          <span className="sidebar-user-name">
+            {currentUser ? currentUser.name : "Guest"}
+          </span>
+          <span className="sidebar-user-role">Admin</span>
+        </div>
+      </div>
 
       <button className="admin-logout">
         <FiLogOut />
