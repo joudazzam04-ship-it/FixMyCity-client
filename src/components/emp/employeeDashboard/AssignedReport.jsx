@@ -1,32 +1,42 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FiMapPin,
   FiCalendar,
   FiGrid
 } from "react-icons/fi";
 
-import pothole from "../../../assets/pothole.jpg";
-import streetlight from "../../../assets/streetlight.jpg";
-import waterLeak from "../../../assets/waterLeak.jpg";
+import placeholder from "../../../assets/pothole.jpg";
 
 import "../../../css/employeeDashboard/AssignedReport.css";
 
-function AssignedReports({ reports }) {
-  const images = {
-    1: pothole,
-    2: streetlight,
-    3: waterLeak
-  };
+function formatDate(value) {
+  if (!value) return "Not assigned";
+  return new Date(value).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function AssignedReports({ reports = [] }) {
+  const navigate = useNavigate();
+
+  const recent = reports.slice(0, 3);
 
   return (
     <section className="assigned-reports-section">
       <h2>Assigned Reports</h2>
 
-      {reports.map((report) => (
+      {recent.length === 0 && (
+        <p>No reports assigned to you yet.</p>
+      )}
+
+      {recent.map((report) => (
         <div className="assigned-report-card" key={report.id}>
 
           <img
-            src={images[report.id]}
+            src={report.image || placeholder}
             alt={report.title}
             className="assigned-report-image"
           />
@@ -36,7 +46,7 @@ function AssignedReports({ reports }) {
 
             <p>
               <FiGrid />
-              {report.department}
+              {report.department || "—"}
             </p>
 
             <p>
@@ -46,21 +56,24 @@ function AssignedReports({ reports }) {
 
             <p>
               <FiCalendar />
-              Assigned: {report.assignedDate}
+              Assigned: {formatDate(report.assigned_date)}
             </p>
           </div>
 
           <div className="assigned-report-action">
 
             <span
-              className={`employee-status-badge ${report.status
+              className={`employee-status-badge ${(report.status || "")
                 .toLowerCase()
                 .replaceAll(" ", "-")}`}
             >
               {report.status}
             </span>
 
-            <button>
+            <button
+              type="button"
+              onClick={() => navigate(`/employee/updates/${report.id}`)}
+            >
               View Details
             </button>
 
@@ -69,7 +82,11 @@ function AssignedReports({ reports }) {
         </div>
       ))}
 
-      <button className="view-all-reports-btn">
+      <button
+        type="button"
+        className="view-all-reports-btn"
+        onClick={() => navigate("/employee/updates")}
+      >
         View All Assigned Reports
       </button>
 

@@ -12,20 +12,7 @@ function AdminTopbar({ title, subtitle, currentUser }) {
         {subtitle && <p>{subtitle}</p>}
       </div>
 
-      <div className="admin-topbar-user">
-        <FiUser className="admin-topbar-avatar" />
-
-        <div className="admin-topbar-user-info">
-   <span className="admin-topbar-name">
-  {currentUser ? currentUser.name : "Guest"}
-</span>
-<span className="admin-topbar-role">
-  {currentUser ? currentUser.role : ""}
-</span>
-        </div>
-
-        <FiChevronDown />
-      </div>
+   
 
     </header>
   );

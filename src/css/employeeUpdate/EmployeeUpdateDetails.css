@@ -70,6 +70,31 @@
   font-weight: 600;
 }
 
+.update-report-id {
+  font-weight: 600;
+}
+
+.update-admin-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+
+  background-color: #f7f8f9;
+  border-left: 3px solid #159447;
+  border-radius: 6px;
+}
+
+.update-admin-note p {
+  margin: 4px 0 0;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.update-header-status {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .update-header-status {
   display: flex;
   flex-direction: column;
@@ -87,17 +112,40 @@
   color: #7a838a;
 }
 
-.current-status {
-  width: fit-content;
-  padding: 7px 12px;
-  border-radius: 6px;
+.current-status.pending-review {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
 
-  background-color: #fff3e6;
-  border: 1px solid #f4c27a;
+.current-status.assigned {
+  background-color: #fff8db;
+  border: 1px solid #f2cf66;
+  color: #a16207;
+}
 
-  color: #d97706;
-  font-size: 13px;
-  font-weight: 600;
+.current-status.in-progress {
+  background-color: #fff0e0;
+  border: 1px solid #f4b26b;
+  color: #c2570c;
+}
+
+.current-status.under-review {
+  background-color: #e7f0fd;
+  border: 1px solid #93b8f0;
+  color: #1d4ed8;
+}
+
+.current-status.resolved {
+  background-color: #e8f7ee;
+  border: 1px solid #7bcf98;
+  color: #16803b;
+}
+
+.current-status.rejected {
+  background-color: #fdecec;
+  border: 1px solid #ef9a9a;
+  color: #c62828;
 }
 
 .priority-status {
@@ -570,4 +618,56 @@
   background-color: #e8f7ee;
   color: #16803b;
   border: 1px solid #7bcf98;
+}
+
+.progress-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.progress-image-item img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.saved-notes-list {
+  margin-top: 22px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 16px;
+}
+
+.saved-notes-list h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #39444b;
+}
+
+.saved-note-item {
+  padding: 10px 12px;
+  margin-bottom: 10px;
+
+  background-color: #f7f8f9;
+  border-left: 3px solid #159447;
+  border-radius: 6px;
+}
+
+.saved-note-item p {
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #39444b;
+  overflow-wrap: break-word;
+}
+
+.saved-note-item span {
+  font-size: 12px;
+  color: #7a838a;
+}
+
+.saved-note-item:last-child {
+  margin-bottom: 0;
 }

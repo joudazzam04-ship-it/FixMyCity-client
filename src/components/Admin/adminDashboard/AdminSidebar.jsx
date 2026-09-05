@@ -1,10 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiHome,
   FiUsers,
   FiFileText,
-  FiSettings,
   FiUser,
   FiLogOut
 } from "react-icons/fi";
@@ -12,7 +11,15 @@ import {
 import logo from "../../../assets/logo.png";
 import "../../../css/adminDashboard/AdminSidebar.css";
 
-function AdminSidebar({ currentUser }) {
+function AdminSidebar({ currentUser, setCurrentUser }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setCurrentUser(null);
+    navigate("/login");
+  };
+
   return (
     <aside className="admin-sidebar">
 
@@ -38,10 +45,7 @@ function AdminSidebar({ currentUser }) {
           <span>Reports</span>
         </NavLink>
 
-        <NavLink to="/admin/settings" className="admin-sidebar-link">
-          <FiSettings />
-          <span>Settings</span>
-        </NavLink>
+       
 
       </nav>
 
@@ -52,11 +56,13 @@ function AdminSidebar({ currentUser }) {
           <span className="sidebar-user-name">
             {currentUser ? currentUser.name : "Guest"}
           </span>
-          <span className="sidebar-user-role">Admin</span>
+          <span className="sidebar-user-role">
+            {currentUser ? currentUser.role : ""}
+          </span>
         </div>
       </div>
 
-      <button className="admin-logout">
+      <button className="admin-logout" onClick={handleLogout}>
         <FiLogOut />
         <span>Logout</span>
       </button>

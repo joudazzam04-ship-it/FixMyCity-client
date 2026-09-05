@@ -6,6 +6,8 @@ import {
   FiGrid
 } from "react-icons/fi";
 
+import placeholder from "../../../assets/pothole.jpg";
+
 function UpdateReportCard({
   id,
   image,
@@ -19,7 +21,7 @@ function UpdateReportCard({
     <div className="update-report-card">
 
       <img
-        src={image}
+        src={image || placeholder}
         alt={title}
         className="update-report-image"
       />
@@ -50,7 +52,7 @@ function UpdateReportCard({
         <span
           className={`update-report-status ${status
             .toLowerCase()
-            .replace(" ", "-")}`}
+            .replaceAll(" ", "-")}`}
         >
           {status}
         </span>

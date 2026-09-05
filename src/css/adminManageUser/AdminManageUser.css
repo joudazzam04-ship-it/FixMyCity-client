@@ -60,3 +60,68 @@
   color: #6b7780;
   margin: 0;
 }
+
+.manage-users-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.create-employee-button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background-color: #159447;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.create-employee-button:hover {
+  background-color: #117d3c;
+}
+
+.create-employee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.create-employee-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #39444b;
+}
+
+.create-employee-field input,
+.create-employee-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfd5d9;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.create-employee-field small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #7a838a;
+}
+
+.create-employee-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+  .create-employee-grid {
+    grid-template-columns: 1fr;
+  }
+}

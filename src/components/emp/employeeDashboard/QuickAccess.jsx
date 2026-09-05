@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FiRefreshCw,
   FiEdit3,
@@ -12,7 +13,7 @@ function QuickAccess() {
     <section className="quick-actions-section">
       <h2>Quick Access</h2>
 
-      <div className="quick-action-card">
+      <Link to="/employee/updates" className="quick-action-card">
         <div className="quick-action-icon">
           <FiRefreshCw />
         </div>
@@ -21,9 +22,9 @@ function QuickAccess() {
           <h3>Update Status</h3>
           <p>Update the progress of assigned reports.</p>
         </div>
-      </div>
+      </Link>
 
-      <div className="quick-action-card">
+      <Link to="/employee/updates" className="quick-action-card">
         <div className="quick-action-icon">
           <FiEdit3 />
         </div>
@@ -32,9 +33,9 @@ function QuickAccess() {
           <h3>Add Note</h3>
           <p>Add notes or comments to a report.</p>
         </div>
-      </div>
+      </Link>
 
-      <div className="quick-action-card">
+      <Link to="/employee/updates" className="quick-action-card">
         <div className="quick-action-icon">
           <FiCheckCircle />
         </div>
@@ -43,7 +44,7 @@ function QuickAccess() {
           <h3>Mark Resolved</h3>
           <p>Mark a report as resolved once the issue is fixed.</p>
         </div>
-      </div>
+      </Link>
     </section>
   );
 }

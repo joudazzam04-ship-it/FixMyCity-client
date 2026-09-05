@@ -78,29 +78,47 @@
 
 .employee-status-badge {
   display: inline-block;
-
-  padding: 6px 10px;
-
+  padding: 7px 12px;
   border-radius: 6px;
-
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 
-.employee-status-badge.in-progress {
-  background-color: #fff3e6;
-  color: #d97706;
-
-  border: 1px solid #f5c27a;
+.employee-status-badge.pending-review {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
 }
 
 .employee-status-badge.assigned {
-  background-color: #eef2f5;
-  color: #4b5563;
-
-  border: 1px solid #d5dadd;
+  background-color: #fff8db;
+  border: 1px solid #f2cf66;
+  color: #a16207;
 }
 
+.employee-status-badge.in-progress {
+  background-color: #fff0e0;
+  border: 1px solid #f4b26b;
+  color: #c2570c;
+}
+
+.employee-status-badge.under-review {
+  background-color: #e7f0fd;
+  border: 1px solid #93b8f0;
+  color: #1d4ed8;
+}
+
+.employee-status-badge.resolved {
+  background-color: #e8f7ee;
+  border: 1px solid #7bcf98;
+  color: #16803b;
+}
+
+.employee-status-badge.rejected {
+  background-color: #fdecec;
+  border: 1px solid #ef9a9a;
+  color: #c62828;
+}
 .assigned-report-action button {
   padding: 8px 14px;
 
@@ -145,38 +163,3 @@
   color: #159447;
 }
 
-.employee-status-badge {
-  display: inline-block;
-  padding: 7px 12px;
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-/* Assigned = Red */
-.employee-status-badge.assigned {
-  background-color: #fdecec;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
-}
-
-/* In Progress = Yellow */
-.employee-status-badge.in-progress {
-  background-color: #fff8db;
-  color: #b7791f;
-  border: 1px solid #f2cf66;
-}
-
-/* Under Review = Orange */
-.employee-status-badge.under-review {
-  background-color: #fff0e0;
-  color: #d97706;
-  border: 1px solid #f4b26b;
-}
-
-/* Resolved = Green */
-.employee-status-badge.resolved {
-  background-color: #e8f7ee;
-  color: #16803b;
-  border: 1px solid #7bcf98;
-}

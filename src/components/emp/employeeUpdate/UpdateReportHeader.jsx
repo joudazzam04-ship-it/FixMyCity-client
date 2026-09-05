@@ -1,12 +1,22 @@
 import React from "react";
 
 import pothole from "../../../assets/pothole.jpg";
+
+function formatDate(value) {
+  if (!value) return "Not assigned";
+  return new Date(value).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 function UpdateReportHeader({ report }) {
   return (
     <div className="update-report-header">
 
       <img
-        src={pothole}
+        src={report.image || pothole}
         alt={report.title}
         className="update-header-image"
       />
@@ -24,8 +34,15 @@ function UpdateReportHeader({ report }) {
         </p>
 
         <p>
-          Assigned: {report.assignedDate}
+          Assigned: {formatDate(report.assigned_date)}
         </p>
+
+        {report.admin_note && (
+          <div className="update-admin-note">
+            <span className="header-label">Admin Note</span>
+            <p>{report.admin_note}</p>
+          </div>
+        )}
 
       </div>
 
@@ -37,12 +54,12 @@ function UpdateReportHeader({ report }) {
           </span>
 
           <span
-  className={`current-status ${report.status
-    .toLowerCase()
-    .replaceAll(" ", "-")}`}
->
-  {report.status}
-</span>
+            className={`current-status ${(report.status || "")
+              .toLowerCase()
+              .replaceAll(" ", "-")}`}
+          >
+            {report.status}
+          </span>
         </div>
 
         <div>
@@ -51,7 +68,7 @@ function UpdateReportHeader({ report }) {
           </span>
 
           <span className="priority-status">
-            Medium
+            {report.priority || "—"}
           </span>
         </div>
 

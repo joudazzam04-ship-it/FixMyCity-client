@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import CitizenNavbar from "../../components/Citizen/citizenDashboard/CitizenNavbar";
@@ -10,20 +10,64 @@ import Footer from "../../components/Home/homePage/Footer";
 
 import "../../css/reportDetails/ReportDetails.css";
 
-function ReportDetails({ reports, currentUser, setCurrentUser }) {
+function ReportDetails({ currentUser, setCurrentUser }) {
   const { id } = useParams();
 
-  const report = reports.find(
-    (item) => item.id === Number(id)
-  );
+  const savedUser = JSON.parse(localStorage.getItem("user") || "null");
+  const user = currentUser || savedUser;
+
+  const [report, setReport] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchReport();
+  }, [id]);
+
+  const fetchReport = async () => {
+    setLoading(true);
+
+    const res = await fetch(`http://localhost:5000/api/reports/${id}`);
+    const data = await res.json();
+
+    if (res.ok) {
+      setReport(data);
+    }
+
+    setLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <>
+        <CitizenNavbar currentUser={user} setCurrentUser={setCurrentUser} />
+        <main className="report-details-page">
+          <div className="report-details-container">
+            <p>Loading report...</p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   if (!report) {
-    return <h2>Report not found</h2>;
+    return (
+      <>
+        <CitizenNavbar currentUser={user} setCurrentUser={setCurrentUser} />
+        <main className="report-details-page">
+          <div className="report-details-container">
+            <BackButton />
+            <h2>Report not found</h2>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
   }
 
   return (
     <>
-  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <CitizenNavbar currentUser={user} setCurrentUser={setCurrentUser} />
 
       <main className="report-details-page">
         <div className="report-details-container">
@@ -36,10 +80,11 @@ function ReportDetails({ reports, currentUser, setCurrentUser }) {
 
           <StatusHistory history={report.history} />
 
-<ReportUpdates
-  updates={report.notes}
-  images={report.progressImages}
-/>
+          <ReportUpdates
+            updates={report.notes}
+            images={report.progressImages}
+          />
+
         </div>
       </main>
 

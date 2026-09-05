@@ -5,14 +5,15 @@ import { FiMail, FiLock } from "react-icons/fi";
 import logo from "../../assets/logo.png";
 import "../../css/auth/Auth.css";
 
-function LoginPage({ users, setCurrentUser }) {
+function LoginPage({ setCurrentUser }) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin() {
+  const handleLogin = async () => {
     setError("");
 
     if (email.trim() === "" || password.trim() === "") {
@@ -20,20 +21,25 @@ function LoginPage({ users, setCurrentUser }) {
       return;
     }
 
-    const user = users.find(
-      (item) => item.email.toLowerCase() === email.trim().toLowerCase()
-    );
+    setLoading(true);
 
-    if (!user || user.password !== password) {
-      setError("Incorrect email or password.");
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.trim(), password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message);
+      setLoading(false);
       return;
     }
 
-    if (user.status === "Inactive") {
-      setError("This account has been deactivated. Contact the administrator.");
-      return;
-    }
+    const user = data.user;
 
+    localStorage.setItem("user", JSON.stringify(user));
     setCurrentUser(user);
 
     if (user.role === "admin") {
@@ -43,7 +49,7 @@ function LoginPage({ users, setCurrentUser }) {
     } else {
       navigate("/citizen/dashboard");
     }
-  }
+  };
 
   return (
     <main className="auth-page">
@@ -96,8 +102,9 @@ function LoginPage({ users, setCurrentUser }) {
           type="button"
           className="auth-submit-button"
           onClick={handleLogin}
+          disabled={loading}
         >
-          Log In
+          {loading ? "Logging in..." : "Log In"}
         </button>
 
         <p className="auth-switch">

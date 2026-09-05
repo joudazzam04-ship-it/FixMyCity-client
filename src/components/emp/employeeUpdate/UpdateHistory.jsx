@@ -1,57 +1,62 @@
 import React from "react";
 
-function UpdateHistory() {
+function UpdateHistory({ history = [], notes = [] }) {
+  function formatDateTime(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    return (
+      date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }) +
+      " • " +
+      date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+      })
+    );
+  }
 
-  const updates = [
-    {
-      id: 1,
-      title: "Report Assigned",
-      description: "Report was assigned to Road Maintenance.",
-      date: "May 17, 2026",
-      time: "10:30 AM"
-    },
-    {
-      id: 2,
-      title: "Status Changed to In Progress",
-      description: "Maintenance work has started.",
-      date: "May 18, 2026",
-      time: "9:15 AM"
-    },
-    {
-      id: 3,
-      title: "Progress Note Added",
-      description: "The damaged section has been inspected.",
-      date: "May 18, 2026",
-      time: "1:45 PM"
-    }
-  ];
+  // Merge status changes and notes into one timeline, oldest first.
+  const items = [
+    ...history.map((item) => ({
+      key: "status-" + item.id,
+      title: "Status changed to " + item.status,
+      description: "The report status was updated.",
+      when: item.changed_at,
+    })),
+    ...notes.map((item) => ({
+      key: "note-" + item.id,
+      title: "Note added" + (item.employee_name ? " by " + item.employee_name : ""),
+      description: item.message,
+      when: item.created_at,
+    })),
+  ].sort((a, b) => new Date(a.when) - new Date(b.when));
 
   return (
     <div className="update-history-card">
 
       <h2>Update History</h2>
 
+      {items.length === 0 && (
+        <p>No updates yet for this report.</p>
+      )}
+
       <div className="update-history-list">
 
-        {updates.map((update) => (
-          <div
-            className="update-history-item"
-            key={update.id}
-          >
+        {items.map((item) => (
+          <div className="update-history-item" key={item.key}>
 
             <div className="history-dot"></div>
 
             <div className="history-content">
 
-              <h4>{update.title}</h4>
+              <h4>{item.title}</h4>
 
-              <p>
-                {update.description}
-              </p>
+              <p>{item.description}</p>
 
-              <span>
-                {update.date} • {update.time}
-              </span>
+              <span>{formatDateTime(item.when)}</span>
 
             </div>
 

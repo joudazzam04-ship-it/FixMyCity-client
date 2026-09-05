@@ -4,15 +4,23 @@ import { FiImage, FiX } from "react-icons/fi";
 import "../../../css/reportIssue/ReportIssue.css";
 
 function ImageUpload({ image, setImage }) {
-  function handleImageChange(event) {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
 
     if (file) {
-      setImage(URL.createObjectURL(file));
+      // Convert the file to a base64 string so it can be sent
+      // to the API as normal JSON and stored in the database.
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+
+      reader.readAsDataURL(file);
     }
 
     event.target.value = "";
-  }
+  };
 
   return (
     <div className="report-field">

@@ -1,47 +1,57 @@
 import React, { useState } from "react";
 
-function UpdateStatus({ report, setReports }) {
+function UpdateStatus({ report, user, onUpdated }) {
   const [status, setStatus] = useState(report.status);
 
   const statusSteps = [
-    { name: "Reported", description: "Report was submitted by the citizen." },
+    { name: "Pending Review", description: "Report was submitted by the citizen." },
     { name: "Assigned", description: "Report was assigned to your department." },
     { name: "In Progress", description: "The issue is currently being handled." },
     { name: "Under Review", description: "Work will be checked before completion." },
     { name: "Resolved", description: "The issue has been completed." }
   ];
 
+  // The backend only accepts these four.
+  const selectableStatuses = [
+    "Assigned",
+    "In Progress",
+    "Under Review",
+    "Resolved"
+  ];
+
   const currentStep = statusSteps.findIndex((step) => step.name === status);
 
-  function handleStatusChange(event) {
-    setStatus(event.target.value);
-  }
-
-  function handleUpdateStatus() {
+  const handleUpdateStatus = async () => {
     if (status === report.status) {
       alert("Status is already " + status);
       return;
     }
 
-    const newHistoryEntry = {
-      status: status,
-      date: new Date().toLocaleDateString()
-    };
-
-    setReports((currentReports) =>
-      currentReports.map((item) =>
-        item.id === report.id
-          ? {
-              ...item,
-              status: status,
-              history: [...item.history, newHistoryEntry]
-            }
-          : item
-      )
+    const res = await fetch(
+      `http://localhost:5000/api/reports/${report.id}/status`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-role": user.role,
+        },
+        body: JSON.stringify({
+          status: status,
+          changed_by: user.id,
+        }),
+      }
     );
 
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
     alert("Status updated successfully");
-  }
+    onUpdated();
+  };
 
   return (
     <div className="update-status-card">
@@ -52,11 +62,11 @@ function UpdateStatus({ report, setReports }) {
       <select
         id="report-status"
         value={status}
-        onChange={handleStatusChange}
+        onChange={(event) => setStatus(event.target.value)}
       >
-        {statusSteps.map((step) => (
-          <option key={step.name} value={step.name}>
-            {step.name}
+        {selectableStatuses.map((name) => (
+          <option key={name} value={name}>
+            {name}
           </option>
         ))}
       </select>

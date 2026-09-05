@@ -2,7 +2,17 @@ import React from "react";
 import { FiFileText, FiClock, FiCheckCircle } from "react-icons/fi";
 import "../../../css/citizenDashboard/DashboardStats.css";
 
-function DashboardStats() {
+function DashboardStats({ reports = [] }) {
+  const total = reports.length;
+
+  const inProgress = reports.filter(
+    (report) => report.status === "In Progress"
+  ).length;
+
+  const resolved = reports.filter(
+    (report) => report.status === "Resolved"
+  ).length;
+
   return (
     <section className="dashboard-stats">
       <div className="stat-card">
@@ -11,7 +21,7 @@ function DashboardStats() {
         </div>
 
         <div className="stat-info">
-          <h2>8</h2>
+          <h2>{total}</h2>
           <p>Total Reports</p>
         </div>
       </div>
@@ -22,7 +32,7 @@ function DashboardStats() {
         </div>
 
         <div className="stat-info">
-          <h2>2</h2>
+          <h2>{inProgress}</h2>
           <p>In Progress</p>
         </div>
       </div>
@@ -33,12 +43,12 @@ function DashboardStats() {
         </div>
 
         <div className="stat-info">
-          <h2>5</h2>
+          <h2>{resolved}</h2>
           <p>Resolved</p>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default DashboardStats;

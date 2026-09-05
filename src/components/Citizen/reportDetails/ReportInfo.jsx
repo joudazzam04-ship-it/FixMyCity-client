@@ -1,20 +1,25 @@
 import React from "react";
 
-import pothole from "../../../assets/pothole.jpg";
-import streetlight from "../../../assets/streetlight.jpg";
-import waterLeak from "../../../assets/waterLeak.jpg";
+import placeholder from "../../../assets/pothole.jpg";
+
+// "2026-09-03T09:57:57.378Z" -> "Sep 3, 2026"
+function formatDate(value) {
+  if (!value) return "—";
+  return new Date(value).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
 
 function ReportInfo({ report }) {
-  const images = {
-    1: pothole,
-    2: streetlight,
-    3: waterLeak
-  };
+  const history = report.history || [];
 
+  // The API returns history oldest-first, so the last entry is the newest.
   const lastUpdated =
-    report.history.length > 0
-      ? report.history[report.history.length - 1].date
-      : report.reportedDate;
+    history.length > 0
+      ? history[history.length - 1].changed_at
+      : report.reported_date;
 
   return (
     <div className="report-info-card">
@@ -22,7 +27,7 @@ function ReportInfo({ report }) {
       {/* Image */}
       <div className="report-info-image">
         <img
-          src={images[report.id]}
+          src={report.image || placeholder}
           alt={report.title}
         />
       </div>
@@ -59,7 +64,7 @@ function ReportInfo({ report }) {
             Date Reported:
           </span>
 
-          <span>{report.reportedDate}</span>
+          <span>{formatDate(report.reported_date)}</span>
         </div>
 
         <div className="report-description-section">
@@ -98,7 +103,7 @@ function ReportInfo({ report }) {
             Last Updated
           </span>
 
-          <p>{lastUpdated}</p>
+          <p>{formatDate(lastUpdated)}</p>
         </div>
 
       </div>

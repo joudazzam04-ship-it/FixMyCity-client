@@ -13,7 +13,8 @@ export default function CitizenNavbar({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();
 
   function handleLogout() {
-    setCurrentUser(null);
+    localStorage.removeItem("user");
+    if (setCurrentUser) setCurrentUser(null);
     navigate("/login");
   }
 

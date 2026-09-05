@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiHome,
   FiMessageSquare,
@@ -10,7 +10,15 @@ import {
 import logo from "../../../assets/logo.png";
 import "../../../css/EmployeeDashboard/EmployeeSidebar.css";
 
-function EmployeeSidebar({ currentUser }) {
+function EmployeeSidebar({ currentUser, setCurrentUser }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    if (setCurrentUser) setCurrentUser(null);
+    navigate("/login");
+  };
+
   return (
     <aside className="employee-sidebar">
 
@@ -51,7 +59,7 @@ function EmployeeSidebar({ currentUser }) {
         </div>
       </div>
 
-      <button className="employee-logout">
+      <button type="button" className="employee-logout" onClick={handleLogout}>
         <FiLogOut />
         <span>Logout</span>
       </button>

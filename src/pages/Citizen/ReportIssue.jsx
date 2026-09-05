@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import CitizenNavbar from "../../components/Citizen/citizenDashboard/CitizenNavbar";
@@ -10,8 +10,14 @@ import ImageUpload from "../../components/Citizen/reportIssue/ImageUpload";
 
 import "../../css/reportIssue/ReportIssue.css";
 
-function ReportIssue({ reports, currentUser, setCurrentUser }) {
+function ReportIssue({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();
+
+  const savedUser = JSON.parse(localStorage.getItem("user") || "null");
+  const user = currentUser || savedUser;
+
+  const [categories, setCategories] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -21,14 +27,20 @@ function ReportIssue({ reports, currentUser, setCurrentUser }) {
   const [image, setImage] = useState(null);
 
   const [latitude, setLatitude] = useState(null);
-const [longitude, setLongitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
-  function handleSubmit() {
-        if (
-      title.trim() === "" ||
-      category === "" ||
-      description.trim() === ""
-    ) {
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    const res = await fetch("http://localhost:5000/api/categories");
+    const data = await res.json();
+    setCategories(data);
+  };
+
+  const handleSubmit = async () => {
+    if (title.trim() === "" || category === "" || description.trim() === "") {
       alert("Please fill in all required fields.");
       return;
     }
@@ -38,43 +50,41 @@ const [longitude, setLongitude] = useState(null);
       return;
     }
 
-    const today = new Date().toLocaleDateString();
+    setSubmitting(true);
 
-    const newReport = {
-      id: Date.now(),
-      title: title,
-      category: category,
-      location: location,
-latitude: latitude,
-longitude: longitude,
-      description: description,
-      reportedDate: today,
-      noticedDate: noticedDate,
-      image: image,
-      status: "Pending Review",
+    const res = await fetch("http://localhost:5000/api/reports", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-role": user.role,
+      },
+      body: JSON.stringify({
+        title: title.trim(),
+        description: description.trim(),
+        location: location,
+        latitude: latitude,
+        longitude: longitude,
+        image: image,
+        category_id: Number(category),
+        reported_by: user.id,
+      }),
+    });
 
-      reportedBy: 101,
-      department: null,
-      assignedTo: null,
-      assignedDate: null,
-      priority: null,
-      adminNote: "",
+    const data = await res.json();
 
-      notes: [],
-      progressImages: [],
-
-      history: [{ status: "Pending Review", date: today }]
-    };
-
-    setReports((currentReports) => [...currentReports, newReport]);
+    if (!res.ok) {
+      alert(data.message);
+      setSubmitting(false);
+      return;
+    }
 
     alert("Report submitted successfully");
     navigate("/citizen/reports");
-  }
+  };
 
   return (
     <>
-  <CitizenNavbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <CitizenNavbar currentUser={user} setCurrentUser={setCurrentUser} />
 
       <main className="report-issue-page">
         <div className="report-issue-container">
@@ -91,6 +101,7 @@ longitude: longitude,
               setTitle={setTitle}
               category={category}
               setCategory={setCategory}
+              categories={categories}
               location={location}
               setLocation={setLocation}
               description={description}
@@ -98,9 +109,10 @@ longitude: longitude,
               noticedDate={noticedDate}
               setNoticedDate={setNoticedDate}
               onSubmit={handleSubmit}
+              submitting={submitting}
             />
 
-                        <div className="report-form-right">
+            <div className="report-form-right">
               <MapSection
                 location={location}
                 setLocation={setLocation}

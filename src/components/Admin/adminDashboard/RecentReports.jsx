@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function RecentReports({ reports, users }) {
+function RecentReports({ reports }) {
   const recent = reports.slice(0, 5);
-
-  function getUserName(userId) {
-    const user = users.find((item) => item.id === userId);
-    return user ? user.name : "—";
-  }
 
   return (
     <section className="admin-card">
@@ -33,12 +28,12 @@ function RecentReports({ reports, users }) {
           {recent.map((report) => (
             <tr key={report.id}>
               <td>{report.title}</td>
-              <td>{report.category}</td>
+              <td>{report.category || "—"}</td>
               <td>{report.location}</td>
 
               <td>
                 <span
-                  className={`admin-status-badge ${report.status
+                  className={`admin-status-badge ${(report.status || "")
                     .toLowerCase()
                     .replaceAll(" ", "-")}`}
                 >
@@ -46,7 +41,7 @@ function RecentReports({ reports, users }) {
                 </span>
               </td>
 
-              <td>{getUserName(report.assignedTo)}</td>
+              <td>{report.assigned_to_name || "—"}</td>
 
               <td>
                 <Link

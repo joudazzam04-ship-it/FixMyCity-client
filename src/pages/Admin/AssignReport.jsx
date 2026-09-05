@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import AdminSidebar from "../../components/Admin/adminDashboard/AdminSidebar";
 import AdminTopbar from "../../components/Admin/adminDashboard/AdminTopbar";
+import ReportActivity from "../../components/Admin/adminDashboard/ReportActivity";
 
 import "../../css/adminDashboard/AdminLayout.css";
 import "../../css/adminDashboard/AdminCard.css";
@@ -11,21 +12,150 @@ import "../../css/adminAssignReport/AdminAssignReport.css";
 
 import { FiImage } from "react-icons/fi";
 
-function AssignReport({ reports, setReports, users, departments }) {
+function AssignReport({ currentUser, setCurrentUser }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const report = reports.find((item) => item.id === Number(id));
+  const savedUser = JSON.parse(localStorage.getItem("user") || "null");
+  const user = currentUser || savedUser;
 
-  const [department, setDepartment] = useState(report ? report.department || "" : "");
-  const [employeeId, setEmployeeId] = useState(report && report.assignedTo ? String(report.assignedTo) : "");
-  const [priority, setPriority] = useState(report ? report.priority || "" : "");
-  const [adminNote, setAdminNote] = useState(report ? report.adminNote || "" : "");
+  const [report, setReport] = useState(null);
+  const [departments, setDepartments] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [departmentId, setDepartmentId] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
+  const [priority, setPriority] = useState("");
+  const [adminNote, setAdminNote] = useState("");
+
+  useEffect(() => {
+    fetchReport();
+    fetchDepartments();
+  }, [id]);
+
+  const fetchReport = async () => {
+    const res = await fetch(`http://localhost:5000/api/reports/${id}`);
+    const data = await res.json();
+
+    if (res.ok) {
+      setReport(data);
+      setDepartmentId(data.department_id ? String(data.department_id) : "");
+      setEmployeeId(data.assigned_to ? String(data.assigned_to) : "");
+      setPriority(data.priority || "");
+      setAdminNote(data.admin_note || "");
+    }
+
+    setLoading(false);
+  };
+
+  const fetchDepartments = async () => {
+    const res = await fetch("http://localhost:5000/api/departments");
+    const data = await res.json();
+    setDepartments(data);
+  };
+
+  const fetchEmployees = async (deptId) => {
+    if (deptId === "") {
+      setEmployees([]);
+      return;
+    }
+
+    const res = await fetch(
+      `http://localhost:5000/api/users/employees/department/${deptId}`,
+      { headers: { "x-role": user.role } }
+    );
+    const data = await res.json();
+    setEmployees(data);
+  };
+
+  // Load the employee list whenever a department is chosen,
+  // including the one already saved on the report.
+  useEffect(() => {
+    fetchEmployees(departmentId);
+  }, [departmentId]);
+
+  const handleDepartmentChange = (event) => {
+    setDepartmentId(event.target.value);
+    setEmployeeId("");
+  };
+
+  const handleAssign = async () => {
+    if (departmentId === "" || employeeId === "" || priority === "") {
+      alert("Please select a department, an employee, and a priority.");
+      return;
+    }
+
+    const res = await fetch(`http://localhost:5000/api/reports/${id}/assign`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-role": user.role,
+      },
+      body: JSON.stringify({
+        department_id: Number(departmentId),
+        assigned_to: Number(employeeId),
+        priority: priority,
+        admin_note: adminNote,
+        changed_by: user.id,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
+    alert("Report assigned successfully");
+    navigate("/admin/reports");
+  };
+
+  const handleReject = async () => {
+    const res = await fetch(`http://localhost:5000/api/reports/${id}/reject`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-role": user.role,
+      },
+      body: JSON.stringify({
+        admin_note: adminNote,
+        changed_by: user.id,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
+    alert("Report rejected");
+    navigate("/admin/reports");
+  };
+
+  function formatDate(value) {
+    if (!value) return "—";
+    return new Date(value).toLocaleDateString();
+  }
+
+  if (loading) {
+    return (
+      <div className="admin-layout">
+        <AdminSidebar currentUser={user} setCurrentUser={setCurrentUser} />
+        <main className="admin-content">
+          <h2>Loading report...</h2>
+        </main>
+      </div>
+    );
+  }
 
   if (!report) {
     return (
       <div className="admin-layout">
-        <AdminSidebar />
+        <AdminSidebar currentUser={user} setCurrentUser={setCurrentUser} />
         <main className="admin-content">
           <h2>Report not found</h2>
         </main>
@@ -33,152 +163,89 @@ function AssignReport({ reports, setReports, users, departments }) {
     );
   }
 
-  const availableEmployees = users.filter(
-    (user) => user.role === "employee" && user.department === department
-  );
-
-  function getUserName(userId) {
-    const user = users.find((item) => item.id === userId);
-    return user ? user.name : "Unknown";
-  }
-
-  function handleDepartmentChange(event) {
-    setDepartment(event.target.value);
-    setEmployeeId("");
-  }
-
-  function handleAssign() {
-    if (department === "" || employeeId === "" || priority === "") {
-      alert("Please select a department, an employee, and a priority.");
-      return;
-    }
-
-    const today = new Date().toLocaleDateString();
-
-    setReports((currentReports) =>
-      currentReports.map((item) =>
-        item.id === report.id
-          ? {
-              ...item,
-              department: department,
-              assignedTo: Number(employeeId),
-              priority: priority,
-              adminNote: adminNote,
-              assignedDate: today,
-              status: "Assigned",
-              history: [...item.history, { status: "Assigned", date: today }]
-            }
-          : item
-      )
-    );
-
-    alert("Report assigned successfully");
-    navigate("/admin/reports");
-  }
-
-  function handleReject() {
-    const today = new Date().toLocaleDateString();
-
-    setReports((currentReports) =>
-      currentReports.map((item) =>
-        item.id === report.id
-          ? {
-              ...item,
-              status: "Rejected",
-              adminNote: adminNote,
-              history: [...item.history, { status: "Rejected", date: today }]
-            }
-          : item
-      )
-    );
-
-    alert("Report rejected");
-    navigate("/admin/reports");
-  }
-
   return (
     <div className="admin-layout">
-      <AdminSidebar />
+      <AdminSidebar currentUser={user} setCurrentUser={setCurrentUser} />
 
       <main className="admin-content">
         <AdminTopbar
           title="Assign Report"
           subtitle="Review the report and assign it to a department and employee."
+          currentUser={user}
+          setCurrentUser={setCurrentUser}
         />
 
-    
-
         <section className="admin-card">
-  <div className="admin-card-header">
-    <h2>Report Summary</h2>
-  </div>
+          <div className="admin-card-header">
+            <h2>Report Summary</h2>
+          </div>
 
-  <div className="assign-summary-top">
+          <div className="assign-summary-top">
 
-    {report.image ? (
-      <img
-        src={report.image}
-        alt={report.title}
-        className="assign-report-image"
-      />
-    ) : (
-      <div className="assign-report-image assign-report-image-empty">
-        <FiImage />
-      </div>
-    )}
+            {report.image ? (
+              <img
+                src={report.image}
+                alt={report.title}
+                className="assign-report-image"
+              />
+            ) : (
+              <div className="assign-report-image assign-report-image-empty">
+                <FiImage />
+              </div>
+            )}
 
-    <div className="assign-summary-content">
+            <div className="assign-summary-content">
 
-      <h3 className="assign-report-title">{report.title}</h3>
+              <h3 className="assign-report-title">{report.title}</h3>
 
-      <div className="assign-summary-grid">
-        <div>
-          <span className="assign-label">Category</span>
-          <p>{report.category}</p>
-        </div>
+              <div className="assign-summary-grid">
+                <div>
+                  <span className="assign-label">Category</span>
+                  <p>{report.category || "—"}</p>
+                </div>
 
-        <div>
-          <span className="assign-label">Location</span>
-          <p>{report.location}</p>
-        </div>
+                <div>
+                  <span className="assign-label">Location</span>
+                  <p>{report.location}</p>
+                </div>
 
-        <div>
-          <span className="assign-label">Date Reported</span>
-          <p>{report.reportedDate}</p>
-        </div>
+                <div>
+                  <span className="assign-label">Date Reported</span>
+                  <p>{formatDate(report.reported_date)}</p>
+                </div>
 
-        <div>
-          <span className="assign-label">Status</span>
-          <p>
-            <span
-              className={`admin-status-badge ${report.status
-                .toLowerCase()
-                .replaceAll(" ", "-")}`}
-            >
-              {report.status}
-            </span>
-          </p>
-        </div>
+                <div>
+                  <span className="assign-label">Status</span>
+                  <p>
+                    <span
+                      className={`admin-status-badge ${(report.status || "")
+                        .toLowerCase()
+                        .replaceAll(" ", "-")}`}
+                    >
+                      {report.status}
+                    </span>
+                  </p>
+                </div>
 
-        <div>
-          <span className="assign-label">Reported By</span>
-          <p>{getUserName(report.reportedBy)}</p>
-        </div>
+                <div>
+                  <span className="assign-label">Reported By</span>
+                  <p>{report.reported_by_name || "—"}</p>
+                </div>
 
-        <div>
-          <span className="assign-label">Current Assignee</span>
-          <p>{report.assignedTo ? getUserName(report.assignedTo) : "Unassigned"}</p>
-        </div>
-      </div>
+                <div>
+                  <span className="assign-label">Current Assignee</span>
+                  <p>{report.assigned_to_name || "Unassigned"}</p>
+                </div>
+              </div>
 
-    </div>
-  </div>
+            </div>
+          </div>
 
-  <div className="assign-description">
-    <span className="assign-label">Description</span>
-    <p>{report.description}</p>
-  </div>
-</section>
+          <div className="assign-description">
+            <span className="assign-label">Description</span>
+            <p>{report.description}</p>
+          </div>
+        </section>
 
         <section className="admin-card">
           <div className="admin-card-header">
@@ -191,12 +258,14 @@ function AssignReport({ reports, setReports, users, departments }) {
               <label htmlFor="department">Department / Service *</label>
               <select
                 id="department"
-                value={department}
+                value={departmentId}
                 onChange={handleDepartmentChange}
               >
                 <option value="">Select department or service</option>
                 {departments.map((item) => (
-                  <option key={item} value={item}>{item}</option>
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -207,22 +276,22 @@ function AssignReport({ reports, setReports, users, departments }) {
                 id="employee"
                 value={employeeId}
                 onChange={(event) => setEmployeeId(event.target.value)}
-                disabled={department === ""}
+                disabled={departmentId === ""}
               >
                 <option value="">
-                  {department === ""
+                  {departmentId === ""
                     ? "Select a department first"
                     : "Select employee"}
                 </option>
 
-                {availableEmployees.map((employee) => (
+                {employees.map((employee) => (
                   <option key={employee.id} value={employee.id}>
                     {employee.name}
                   </option>
                 ))}
               </select>
 
-              {department !== "" && availableEmployees.length === 0 && (
+              {departmentId !== "" && employees.length === 0 && (
                 <p className="assign-warning">
                   No employees in this department.
                 </p>
@@ -275,6 +344,11 @@ function AssignReport({ reports, setReports, users, departments }) {
             </button>
           </div>
         </section>
+        <ReportActivity
+          history={report.history || []}
+          notes={report.notes || []}
+          images={report.progressImages || []}
+        />
       </main>
     </div>
   );

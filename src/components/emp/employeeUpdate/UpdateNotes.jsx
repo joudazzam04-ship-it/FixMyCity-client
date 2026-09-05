@@ -1,34 +1,55 @@
 import React, { useState } from "react";
 
-function UpdateNotes({ report, setReports }) {
+function UpdateNotes({ report, user, onUpdated }) {
   const [note, setNote] = useState("");
 
-  function handleSaveNote() {
+  const notes = report.notes || [];
+
+  const handleSaveNote = async () => {
     if (note.trim() === "") {
       return;
     }
 
-    const newNote = {
-      id: Date.now(),
-      department: report.department,
-      message: note,
-      date: new Date().toLocaleDateString()
-    };
-
-    setReports((currentReports) =>
-      currentReports.map((item) =>
-        item.id === report.id
-          ? {
-              ...item,
-              notes: [...item.notes, newNote]
-            }
-          : item
-      )
+    const res = await fetch(
+      `http://localhost:5000/api/reports/${report.id}/notes`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-role": user.role,
+        },
+        body: JSON.stringify({
+          message: note,
+          employee_id: user.id,
+        }),
+      }
     );
 
-    setNote("");
+    const data = await res.json();
 
-    alert("Note saved successfully");
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
+    setNote("");
+    onUpdated();
+  };
+
+  function formatDateTime(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    return (
+      date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }) +
+      " • " +
+      date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+      })
+    );
   }
 
   return (
@@ -52,6 +73,21 @@ function UpdateNotes({ report, setReports }) {
       >
         Save Note
       </button>
+
+      {notes.length > 0 && (
+        <div className="saved-notes-list">
+          <h4>Your previous notes</h4>
+
+          {notes.map((item) => (
+            <div className="saved-note-item" key={item.id}>
+              <p>{item.message}</p>
+              <span>
+                {item.employee_name} • {formatDateTime(item.created_at)}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

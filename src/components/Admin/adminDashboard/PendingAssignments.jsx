@@ -2,12 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiAlertTriangle } from "react-icons/fi";
 
-
-
 function PendingAssignments({ reports }) {
   const pending = reports.filter(
-    (report) => report.assignedTo === null && report.status !== "Rejected"
+    (report) => report.assigned_to === null && report.status !== "Rejected"
   );
+
+  function formatDate(value) {
+    if (!value) return "—";
+    return new Date(value).toLocaleDateString();
+  }
 
   return (
     <section className="admin-card">
@@ -38,7 +41,7 @@ function PendingAssignments({ reports }) {
           <span className="pending-assignment-status">Unassigned</span>
 
           <span className="pending-assignment-date">
-            {report.reportedDate}
+            {formatDate(report.reported_date)}
           </span>
 
           <Link

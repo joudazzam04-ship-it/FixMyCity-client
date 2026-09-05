@@ -2,16 +2,16 @@ import React from "react";
 
 import ReportRow from "./ReportRow";
 
-import pothole from "../../../assets/pothole.jpg";
-import streetlight from "../../../assets/streetlight.jpg";
-import waterLeak from "../../../assets/waterLeak.jpg";
-
-function ReportsTable({ reports }) {
-  const images = {
-    1: pothole,
-    2: streetlight,
-    3: waterLeak
-  };
+function ReportsTable({ reports = [] }) {
+  if (reports.length === 0) {
+    return (
+      <div className="reports-table">
+        <p style={{ padding: "24px" }}>
+          You haven't reported any issues yet.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="reports-table">
@@ -27,11 +27,15 @@ function ReportsTable({ reports }) {
         <ReportRow
           key={report.id}
           id={report.id}
-          image={images[report.id]}
+          image={report.image}
           title={report.title}
           location={report.location}
           status={report.status}
-          date={report.reportedDate}
+          date={new Date(report.reported_date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
         />
       ))}
 

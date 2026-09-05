@@ -5,8 +5,7 @@ import { FiUser, FiMail, FiLock, FiPhone } from "react-icons/fi";
 import logo from "../../assets/logo.png";
 import "../../css/auth/Auth.css";
 
-
-function RegisterPage({ users, setUsers, setCurrentUser }) {
+function RegisterPage({ setCurrentUser }) {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -15,8 +14,9 @@ function RegisterPage({ users, setUsers, setCurrentUser }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleRegister() {
+  const handleRegister = async () => {
     setError("");
 
     if (
@@ -35,15 +35,6 @@ function RegisterPage({ users, setUsers, setCurrentUser }) {
       return;
     }
 
-    const emailTaken = users.some(
-      (user) => user.email.toLowerCase() === email.trim().toLowerCase()
-    );
-
-    if (emailTaken) {
-      setError("An account with this email already exists.");
-      return;
-    }
-
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return;
@@ -54,23 +45,34 @@ function RegisterPage({ users, setUsers, setCurrentUser }) {
       return;
     }
 
-    const newUser = {
-      id: Date.now(),
-      name: name.trim(),
-      role: "citizen",
-      email: email.trim(),
-      password: password,
-      phone: phone.trim(),
-      status: "Active",
-      joinedOn: new Date().toLocaleDateString(),
-      department: null
-    };
+    setLoading(true);
 
-    setUsers((currentUsers) => [...currentUsers, newUser]);
-    setCurrentUser(newUser);
+    const res = await fetch("http://localhost:5000/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name.trim(),
+        email: email.trim(),
+        password: password,
+        phone: phone.trim(),
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message);
+      setLoading(false);
+      return;
+    }
+
+    const user = data.user;
+
+    localStorage.setItem("user", JSON.stringify(user));
+    setCurrentUser(user);
 
     navigate("/citizen/dashboard");
-  }
+  };
 
   return (
     <main className="auth-page">
@@ -167,8 +169,9 @@ function RegisterPage({ users, setUsers, setCurrentUser }) {
           type="button"
           className="auth-submit-button"
           onClick={handleRegister}
+          disabled={loading}
         >
-          Create Account
+          {loading ? "Creating account..." : "Create Account"}
         </button>
 
         <p className="auth-switch">

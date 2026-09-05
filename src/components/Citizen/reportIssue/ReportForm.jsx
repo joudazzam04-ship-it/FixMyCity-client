@@ -6,9 +6,11 @@ import "../../../css/reportIssue/ReportIssue.css";
 function ReportForm({
   title, setTitle,
   category, setCategory,
+  categories = [],
   description, setDescription,
   noticedDate, setNoticedDate,
-  onSubmit
+  onSubmit,
+  submitting
 }) {
   const navigate = useNavigate();
 
@@ -32,15 +34,13 @@ function ReportForm({
           onChange={(event) => setCategory(event.target.value)}
         >
           <option value="">Select a category</option>
-          <option>Road Damage</option>
-          <option>Streetlight</option>
-          <option>Garbage</option>
-          <option>Sidewalk</option>
-          <option>Water Leak</option>
+          {categories.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
+            </option>
+          ))}
         </select>
       </div>
-
-      
 
       <div className="report-field">
         <label>Description *</label>
@@ -66,8 +66,9 @@ function ReportForm({
           type="button"
           className="submit-report-btn"
           onClick={onSubmit}
+          disabled={submitting}
         >
-          Submit Report
+          {submitting ? "Submitting..." : "Submit Report"}
         </button>
 
         <button

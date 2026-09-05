@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import {
   FiFileText,
   FiClock,
@@ -23,7 +22,7 @@ function AdminStats({ reports, users }) {
     },
     {
       label: "Assigned Reports",
-      value: reports.filter((report) => report.assignedTo !== null).length,
+      value: reports.filter((report) => report.assigned_to !== null).length,
       icon: <FiUsers />
     },
     {

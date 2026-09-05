@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   FiClipboard,
@@ -8,7 +7,17 @@ import {
 
 import "../../../css/EmployeeDashboard/EmployeeStats.css";
 
-function EmployeeStats() {
+function EmployeeStats({ reports = [] }) {
+  const assigned = reports.length;
+
+  const inProgress = reports.filter(
+    (report) => report.status === "In Progress"
+  ).length;
+
+  const resolved = reports.filter(
+    (report) => report.status === "Resolved"
+  ).length;
+
   return (
     <section className="employee-stats">
 
@@ -19,7 +28,7 @@ function EmployeeStats() {
 
         <div>
           <p>Assigned Reports</p>
-          <h2>12</h2>
+          <h2>{assigned}</h2>
         </div>
       </div>
 
@@ -30,7 +39,7 @@ function EmployeeStats() {
 
         <div>
           <p>In Progress</p>
-          <h2>5</h2>
+          <h2>{inProgress}</h2>
         </div>
       </div>
 
@@ -41,7 +50,7 @@ function EmployeeStats() {
 
         <div>
           <p>Resolved</p>
-          <h2>7</h2>
+          <h2>{resolved}</h2>
         </div>
       </div>
 

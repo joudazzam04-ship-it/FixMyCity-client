@@ -99,3 +99,39 @@
 .latest-report-action button:hover {
   background-color: #f8f8f8;
 }
+
+.status-badge.pending-review {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
+
+.status-badge.assigned {
+  background-color: #fff8db;
+  border: 1px solid #f2cf66;
+  color: #a16207;
+}
+
+.status-badge.in-progress {
+  background-color: #fff0e0;
+  border: 1px solid #f4b26b;
+  color: #c2570c;
+}
+
+.status-badge.under-review {
+  background-color: #e7f0fd;
+  border: 1px solid #93b8f0;
+  color: #1d4ed8;
+}
+
+.status-badge.resolved {
+  background-color: #e8f7ee;
+  border: 1px solid #7bcf98;
+  color: #16803b;
+}
+
+.status-badge.rejected {
+  background-color: #fdecec;
+  border: 1px solid #ef9a9a;
+  color: #c62828;
+}
