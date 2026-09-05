@@ -4,10 +4,12 @@ import CitizenDashboard from "./pages/Citizen/CitizenDashboard.jsx";
 import ReportIssue from "./pages/Citizen/ReportIssue.jsx";
 import MyReports from "./pages/Citizen/MyReports.jsx";
 import ReportDetails from "./pages/Citizen/ReportDetails.jsx";
+import CitizenProfile from "./pages/Citizen/CitizenProfile.jsx";
 
 import EmployeeDashboard from "./pages/Emp/EmployeeDashboard.jsx";
 import EmployeeUpdates from "./pages/Emp/EmployeeUpdate.jsx";
 import EmployeeUpdateDetails from "./pages/Emp/EmployeeUpdateDetails.jsx";
+import EmployeeProfile from "./pages/Emp/EmployeeProfile.jsx";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import AdminReports from "./pages/Admin/AdminReports.jsx";
@@ -89,6 +91,15 @@ function App() {
         <Route
           path="/admin/reports/:id/assign"
           element={<AssignReport currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+        />
+
+                <Route
+          path="/citizen/profile"
+          element={<CitizenProfile currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+        />
+        <Route
+          path="/employee/profile"
+          element={<EmployeeProfile currentUser={currentUser} setCurrentUser={setCurrentUser} />}
         />
 
       </Routes>
