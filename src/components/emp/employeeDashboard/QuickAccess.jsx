@@ -6,7 +6,7 @@ import {
   FiCheckCircle
 } from "react-icons/fi";
 
-import "../../../css/EmployeeDashboard/QuickAccess.css";
+import "../../css/adminDashboard/adminLayout.css";
 
 function QuickAccess() {
   return (

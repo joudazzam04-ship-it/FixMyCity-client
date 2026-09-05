@@ -5,7 +5,7 @@ import {
   FiCheckCircle
 } from "react-icons/fi";
 
-import "../../../css/EmployeeDashboard/EmployeeStats.css";
+import "../../../css/employeeDashboard/EmployeeStats.css";
 
 function EmployeeStats({ reports = [] }) {
   const assigned = reports.length;

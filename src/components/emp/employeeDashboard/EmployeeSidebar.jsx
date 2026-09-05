@@ -8,7 +8,7 @@ import {
 } from "react-icons/fi";
 
 import logo from "../../../assets/logo.png";
-import "../../../css/EmployeeDashboard/EmployeeSidebar.css";
+import "../../../css/employeeDashboard/EmployeeSidebar.css";
 
 function EmployeeSidebar({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();

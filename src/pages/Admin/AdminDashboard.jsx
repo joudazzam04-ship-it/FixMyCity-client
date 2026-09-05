@@ -7,8 +7,7 @@ import RecentReports from "../../components/Admin/adminDashboard/RecentReports";
 import PendingAssignments from "../../components/Admin/adminDashboard/PendingAssignments";
 import QuickAccess from "../../components/Admin/adminDashboard/QuickAccess";
 import StatusSummary from "../../components/Admin/adminDashboard/StatusSummary";
-
-import "../../css/adminDashboard/AdminLayout.css";
+import "../../css/adminDashboard/adminLayout.css";
 import "../../css/adminDashboard/AdminStats.css";
 import "../../css/adminDashboard/AdminCard.css";
 
