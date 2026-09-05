@@ -7,6 +7,8 @@ import QuickAccess from "../../components/emp/employeeDashboard/QuickAccess.jsx"
 
 import "../../css/employeeDashboard/EmployeeDashboard.css";
 
+
+
 function EmployeeDashboard({ currentUser, setCurrentUser }) {
   const [reports, setReports] = useState([]);
 
