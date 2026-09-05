@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AdminSidebar from "../../components/Admin/adminDashboard/AdminSidebar";
 import AdminTopbar from "../../components/Admin/adminDashboard/AdminTopbar";
 
-import "../../css/adminDashboard/AdminLayout.css";
+import "../../css/adminDashboard/adminLayout.css";
 import "../../css/adminDashboard/AdminCard.css";
 import "../../css/adminReportPage/AdminReport.css";
 
