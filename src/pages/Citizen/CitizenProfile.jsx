@@ -25,7 +25,7 @@ function CitizenProfile({ currentUser, setCurrentUser }) {
   const fetchProfile = async () => {
     if (!user) return;
 
-    const res = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/${user.id}`, {
       headers: { "x-role": user.role },
     });
     const data = await res.json();
@@ -47,7 +47,7 @@ function CitizenProfile({ currentUser, setCurrentUser }) {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/users/${user.id}/profile`,
+      `${import.meta.env.VITE_SERVER_URL}/api/users/${user.id}/profile`,
       {
         method: "PUT",
         headers: {

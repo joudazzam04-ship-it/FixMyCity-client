@@ -34,7 +34,7 @@ function ReportIssue({ currentUser, setCurrentUser }) {
   }, []);
 
   const fetchCategories = async () => {
-    const res = await fetch("http://localhost:5000/api/categories");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/categories`);
     const data = await res.json();
     setCategories(data);
   };

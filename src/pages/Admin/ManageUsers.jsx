@@ -33,7 +33,7 @@ function ManageUsers({ currentUser, setCurrentUser }) {
   }, []);
 
   const fetchDepartments = async () => {
-    const res = await fetch("http://localhost:5000/api/departments");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/departments`);
     const data = await res.json();
     setDepartments(data);
   };
@@ -49,7 +49,7 @@ function ManageUsers({ currentUser, setCurrentUser }) {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/users/employees", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/employees`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function ManageUsers({ currentUser, setCurrentUser }) {
   const fetchUsers = async () => {
     if (!user) return;
 
-    const res = await fetch("http://localhost:5000/api/users", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users`, {
       headers: { "x-role": user.role },
     });
     const data = await res.json();
@@ -95,7 +95,7 @@ function ManageUsers({ currentUser, setCurrentUser }) {
   const toggleUserStatus = async (item) => {
     const newStatus = item.status === "Active" ? "Inactive" : "Active";
 
-    await fetch(`http://localhost:5000/api/users/${item.id}/status`, {
+    await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/${item.id}/status`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
