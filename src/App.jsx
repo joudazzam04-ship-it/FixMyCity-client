@@ -26,7 +26,7 @@ function App() {
   // The logged-in user is read once from localStorage so a page refresh
   // keeps the session. Every page fetches its own data from the API.
   const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem("user");
+    const saved = localStorage.getItem("user");   //localStorage can keep information even after refreshing the page
     return saved ? JSON.parse(saved) : null;
   });
 
@@ -47,7 +47,7 @@ function App() {
         />
 
         <Route
-          path="/citizen/dashboard"
+          path="/citizen/dashboard"           //props
           element={<CitizenDashboard currentUser={currentUser} setCurrentUser={setCurrentUser} />}
         />
         <Route
@@ -107,4 +107,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; //App component available to other files.
