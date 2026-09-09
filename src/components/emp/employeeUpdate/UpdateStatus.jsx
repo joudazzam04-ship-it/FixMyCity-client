@@ -28,7 +28,7 @@ function UpdateStatus({ report, user, onUpdated }) {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/reports/${report.id}/status`,
+      `${import.meta.env.VITE_SERVER_URL}/api/reports/${report.id}/status`,
       {
         method: "PUT",
         headers: {

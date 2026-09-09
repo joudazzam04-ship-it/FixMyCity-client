@@ -52,7 +52,7 @@ function ReportIssue({ currentUser, setCurrentUser }) {
 
     setSubmitting(true);
 
-    const res = await fetch("http://localhost:5000/api/reports", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

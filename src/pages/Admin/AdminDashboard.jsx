@@ -24,7 +24,7 @@ function AdminDashboard({ currentUser, setCurrentUser }) {
   }, []);
 
   const fetchReports = async () => {
-    const res = await fetch("http://localhost:5000/api/reports");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports`);
     const data = await res.json();
     setReports(data);
   };
@@ -32,7 +32,7 @@ function AdminDashboard({ currentUser, setCurrentUser }) {
   const fetchUsers = async () => {
     if (!user) return;
 
-    const res = await fetch("http://localhost:5000/api/users", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users`, {
       headers: { "x-role": user.role },
     });
     const data = await res.json();

@@ -35,7 +35,7 @@ function AssignReport({ currentUser, setCurrentUser }) {
   }, [id]);
 
   const fetchReport = async () => {
-    const res = await fetch(`http://localhost:5000/api/reports/${id}`);
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports/${id}`);
     const data = await res.json();
 
     if (res.ok) {
@@ -50,7 +50,7 @@ function AssignReport({ currentUser, setCurrentUser }) {
   };
 
   const fetchDepartments = async () => {
-    const res = await fetch("http://localhost:5000/api/departments");
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/departments`);
     const data = await res.json();
     setDepartments(data);
   };
@@ -62,7 +62,7 @@ function AssignReport({ currentUser, setCurrentUser }) {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/users/employees/department/${deptId}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/users/employees/department/${deptId}`,
       { headers: { "x-role": user.role } }
     );
     const data = await res.json();
@@ -86,7 +86,7 @@ function AssignReport({ currentUser, setCurrentUser }) {
       return;
     }
 
-    const res = await fetch(`http://localhost:5000/api/reports/${id}/assign`, {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports/${id}/assign`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function AssignReport({ currentUser, setCurrentUser }) {
   };
 
   const handleReject = async () => {
-    const res = await fetch(`http://localhost:5000/api/reports/${id}/reject`, {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports/${id}/reject`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

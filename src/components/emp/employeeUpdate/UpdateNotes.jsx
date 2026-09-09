@@ -11,7 +11,7 @@ function UpdateNotes({ report, user, onUpdated }) {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/reports/${report.id}/notes`,
+      `${import.meta.env.VITE_SERVER_URL}/api/reports/${report.id}/notes`,
       {
         method: "POST",
         headers: {

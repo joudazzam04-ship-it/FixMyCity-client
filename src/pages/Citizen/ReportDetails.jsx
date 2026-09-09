@@ -26,7 +26,7 @@ function ReportDetails({ currentUser, setCurrentUser }) {
   const fetchReport = async () => {
     setLoading(true);
 
-    const res = await fetch(`http://localhost:5000/api/reports/${id}`);
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/reports/${id}`);
     const data = await res.json();
 
     if (res.ok) {

@@ -27,8 +27,8 @@ function ProgressUpload({ report, user, onUpdated }) {
     for (const file of filesToUpload) {
       const base64 = await readFileAsBase64(file);
 
-      const res = await fetch(
-        `http://localhost:5000/api/reports/${report.id}/images`,
+ const res = await fetch(
+  `${import.meta.env.VITE_SERVER_URL}/api/reports/${report.id}/images`,
         {
           method: "POST",
           headers: {
