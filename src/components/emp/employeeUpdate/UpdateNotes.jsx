@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function UpdateNotes({ report, user, onUpdated }) {
   const [note, setNote] = useState("");
@@ -10,35 +11,40 @@ function UpdateNotes({ report, user, onUpdated }) {
       return;
     }
 
-    const res = await fetch(
-      `${import.meta.env.VITE_SERVER_URL}/api/reports/${report.id}/notes`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-role": user.role,
-        },
-        body: JSON.stringify({
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/reports/${report.id}/notes`,
+
+        // body
+        {
           message: note,
           employee_id: user.id,
-        }),
-      }
-    );
+        },
 
-    const data = await res.json();
+        // headers/config
+        {
+          headers: {
+            "x-role": user.role,
+          },
+        }
+      );
 
-    if (!res.ok) {
-      alert(data.message);
-      return;
+      setNote("");
+      onUpdated();
+
+    } catch (error) {
+      alert(
+        error.response?.data?.message ||
+        "Failed to save note"
+      );
     }
-
-    setNote("");
-    onUpdated();
   };
 
   function formatDateTime(value) {
     if (!value) return "";
+
     const date = new Date(value);
+
     return (
       date.toLocaleDateString("en-US", {
         month: "short",
@@ -81,8 +87,10 @@ function UpdateNotes({ report, user, onUpdated }) {
           {notes.map((item) => (
             <div className="saved-note-item" key={item.id}>
               <p>{item.message}</p>
+
               <span>
-                {item.employee_name} • {formatDateTime(item.created_at)}
+                {item.employee_name} •{" "}
+                {formatDateTime(item.created_at)}
               </span>
             </div>
           ))}

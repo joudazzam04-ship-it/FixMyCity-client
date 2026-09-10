@@ -3,11 +3,22 @@ import "../../../css/myReport/MyReport.css";
 
 import { Link } from "react-router-dom";
 
-function ReportRow({ id, image, title, location, status, date }) {
+function ReportRow({
+  id,
+  image,
+  title,
+  location,
+  status,
+  date,
+  report,
+  onDelete
+}) {
+
   return (
     <div className="report-row">
 
       <div className="report-issue">
+
         {image ? (
           <img
             src={image}
@@ -28,9 +39,12 @@ function ReportRow({ id, image, title, location, status, date }) {
             {location}
           </p>
         </div>
+
       </div>
 
+
       <div className="report-status">
+
         <span
           className={`report-status-badge ${status
             .toLowerCase()
@@ -38,16 +52,37 @@ function ReportRow({ id, image, title, location, status, date }) {
         >
           {status}
         </span>
+
       </div>
+
 
       <div className="report-date">
         {date}
       </div>
 
+
       <div className="report-action">
-        <Link to={`/citizen/reports/${id}`} className="view-report-btn">
+
+        <Link
+          to={`/citizen/reports/${id}`}
+          className="view-report-btn"
+        >
           View
         </Link>
+
+
+        {status === "Pending Review" && (
+
+          <button
+            type="button"
+            className="delete-report-btn"
+            onClick={() => onDelete(report)}
+          >
+            Delete
+          </button>
+
+        )}
+
       </div>
 
     </div>

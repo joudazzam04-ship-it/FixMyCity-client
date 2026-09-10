@@ -2,8 +2,8 @@ import React from "react";
 
 import ReportRow from "./ReportRow";
 
-function ReportsTable({ reports = [] }) {
-  if (reports.length === 0) {
+function ReportsTable({ reports = [], onDelete }) {
+    if (reports.length === 0) {
     return (
       <div className="reports-table">
         <p style={{ padding: "24px" }}>
@@ -24,20 +24,22 @@ function ReportsTable({ reports = [] }) {
       </div>
 
       {reports.map((report) => (
-        <ReportRow
-          key={report.id}
-          id={report.id}
-          image={report.image}
-          title={report.title}
-          location={report.location}
-          status={report.status}
-          date={new Date(report.reported_date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        />
-      ))}
+  <ReportRow
+    key={report.id}
+    id={report.id}
+    image={report.image}
+    title={report.title}
+    location={report.location}
+    status={report.status}
+    date={new Date(report.reported_date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })}
+    report={report}
+    onDelete={onDelete}
+  />
+))}
 
     </div>
   );
