@@ -33,7 +33,9 @@ function AdminDashboard({ currentUser, setCurrentUser }) {
     if (!user) return;
 
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users`, {
-      headers: { "x-role": user.role },
+      headers: { "x-role": user.role }, 
+// add header to request to indicate the role of the user making the request. 
+
     });
     const data = await res.json();
     setUsers(data);
@@ -46,10 +48,10 @@ function AdminDashboard({ currentUser, setCurrentUser }) {
       <main className="admin-content">
         <AdminTopbar
           title="Admin Dashboard"
-          currentUser={user}
-          setCurrentUser={setCurrentUser}
         />
 
+
+        {/* passing props from the parent AdminDashboard to the child AdminStats component. The reports and users state variables are passed as props to the AdminStats component */}
         <AdminStats reports={reports} users={users} />
 
         <div className="admin-dashboard-columns">

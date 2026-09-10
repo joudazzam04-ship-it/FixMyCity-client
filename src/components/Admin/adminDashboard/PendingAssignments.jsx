@@ -7,7 +7,9 @@ function PendingAssignments({ reports }) {
     (report) => report.assigned_to === null && report.status !== "Rejected"
   );
 
-  function formatDate(value) {
+
+// Helper function to format the date
+  function formatDate(value) { 
     if (!value) return "—";
     return new Date(value).toLocaleDateString();
   }

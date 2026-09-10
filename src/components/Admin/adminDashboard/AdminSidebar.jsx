@@ -17,7 +17,7 @@ function AdminSidebar({ currentUser, setCurrentUser }) {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setCurrentUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   return (

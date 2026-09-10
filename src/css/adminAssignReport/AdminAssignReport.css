@@ -128,3 +128,117 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== Report Activity timeline ===== */
+
+.report-activity-empty {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #6b7780;
+}
+
+.report-activity-timeline {
+  margin-top: 6px;
+}
+
+.report-activity-item {
+  position: relative;
+  padding: 0 0 22px 26px;
+  border-left: 2px solid #e8ebed;
+}
+
+.report-activity-item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.report-activity-marker {
+  position: absolute;
+  left: -7px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #159447;
+  box-shadow: 0 0 0 3px white;
+}
+
+.report-activity-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.report-activity-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7780;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.report-activity-date {
+  font-size: 12px;
+  color: #9aa3a9;
+  white-space: nowrap;
+}
+
+.report-activity-text {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #17232b;
+}
+
+.report-activity-actor {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6b7780;
+}
+
+.report-activity-sub {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background-color: #f7f9fa;
+  border-left: 3px solid #d5d9dc;
+}
+
+.report-activity-sub.activity-note {
+  border-left-color: #e0a13a;
+}
+
+.report-activity-sub.activity-image {
+  border-left-color: #159447;
+}
+
+.report-activity-sub-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.report-activity-sub-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #17232b;
+}
+
+.report-activity-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.report-activity-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e8ebed;
+  display: block;
+}
